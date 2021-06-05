@@ -4,10 +4,7 @@ const uploader = require("../config/cloudinary.config.js");
 const PlantModel = require("../models/Plant.model");
 const RequestModel = require("../models/Request.model");
 
-// NOTE: All your API routes will start from /api 
-
-// -------------------------- All plants --------------------------
-// will handle all GET requests to http:localhost:5005/api/plants
+// Handle GET All plants
 router.get(
   "/plants",
   (req, res) => {
@@ -30,7 +27,7 @@ router.get(
   }
 );
 
-// ------------------------ Search plant --------------------------
+// Handle GET Search plant
 router.get(
   "/plants/search",
   (req, res) => {
@@ -60,19 +57,18 @@ router.get(
   }
 );
 
-// ------------------------ Create plant ----------------------------
-// will handle all POST requests to http:localhost:5005/api/create
+// Handle POST Create plant
 router.post(
   "/plants/create",
   (req, res) => {
     const { name, description, location, image, size, price } = req.body;
     const newPlant = {
-      name: name,
-      description: description,
-      size: size,
-      image: image,
-      location: location,
-      price: price,
+      name,
+      description,
+      size,
+      image,
+      location,
+      price,
       creator: req.session.loggedInUser._id
     };
     PlantModel.create(newPlant)
@@ -94,9 +90,7 @@ router.post(
   }
 );
 
-// --------------------------- All plants ----------------------------------
-// will handle all GET requests to http:localhost:5005/api/plants/:plantId
-//PS: Don"t type :plantId , it"s something dynamic, 
+// Handle GET Plant by id
 router.get(
   "/plants/:plantId",
   (req, res) => {
@@ -119,8 +113,7 @@ router.get(
   }
 );
 
-// -------------------------- Delete plant ------------------------------
-// will handle all DELETE requests to http:localhost:5005/api/plants/:id
+// Handle DELETE  plant
 router.delete(
   "/plants/:id",
   (req, res) => {
@@ -143,22 +136,25 @@ router.delete(
   }
 );
 
-// ------------------------------ Edit plant -----------------------------
-// will handle all PATCH requests to http:localhost:5005/api/plants/:id
+// Handle PATCH Edit plant
 router.patch(
   "/plants/:id",
   (req, res) => {
     let id = req.params.id;
     const { name, description, size, location, image, price } = req.body;
     const updatedPlant = {
-      name: name,
-      description: description,
-      size: size,
-      image: image,
-      location: location,
-      price: price
+      name,
+      description,
+      size,
+      image,
+      location,
+      price
     };
-    PlantModel.findByIdAndUpdate(id, { $set: updatedPlant }, { new: true })
+    PlantModel.findByIdAndUpdate(
+      id, 
+      { $set: updatedPlant }, 
+      { new: true }
+    )
       .then(
         (response) => {
           res.status(200).json(response);
@@ -177,18 +173,18 @@ router.patch(
   }
 );
 
-// ------------------------------ Create request ---------------------------
+// Handle POST Create request
 router.post(
   "/plants/request",
   (req, res) => {
     const { message, buyer, seller, plant } = req.body;
-    newRequest = {
-      buyer: buyer,
-      seller: seller,
-      plant: plant,
-      message: message
+    const request = {
+      buyer,
+      seller,
+      plant,
+      message
     }
-    RequestModel.create(newRequest)
+    RequestModel.create(request)
       .then(
         (response) => {
           res.status(200).json(response);
@@ -207,27 +203,27 @@ router.post(
   }
 );
 
-// ---------------------------- Get requests --------------------------
+// Handle GET My requests
 router.get(
   "/myrequests",
   (req, res) => {
     RequestModel.find({})
-    .then(
-      (requests) => {
-        console.log("Requests server", requests)
-        res.status(200).json(requests);
-      }
-    )
-    .catch(
-      (err) => {
-        res.status(500).json(
-          {
-            error: "Get requests failed",
-            message: err
-          }
-        );
-      }
-    );
+      .then(
+        (requests) => {
+          console.log("Requests server", requests);
+          res.status(200).json(requests);
+        }
+      )
+      .catch(
+        (err) => {
+          res.status(500).json(
+            {
+              error: "Get requests failed",
+              message: err
+            }
+          );
+        }
+      );
   }
 );
 

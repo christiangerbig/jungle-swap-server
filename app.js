@@ -1,17 +1,17 @@
-// ℹ️ Gets access to environment variables/settings
+// Get access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");
 
-// ℹ️ Connects to the database
+// Connect to the database
 require("./db");
 
-// Handles http requests (express is node js framework)
+// Handle http requests
 // https://www.npmjs.com/package/express
 const express = require("express");
 
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most middlewares
+// Runs most middlewares
 require("./config")(app);
 
 // Set up connect-mongo
@@ -25,12 +25,12 @@ app.use(
       saveUninitialized: false,
       resave: false,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24// is in milliseconds.  expiring in 1 day
+        maxAge: 1000 * 60 * 60 * 24 // In milliseconds.  expiring in 1 day
       },
       store: new MongoStore(
         {
           mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/jungle-swap",
-          ttl: 60 * 60 * 24, // is in seconds. expiring in 1 day
+          ttl: 60 * 60 * 24, // In seconds. expiring in 1 day
         }
       )
     }
@@ -40,8 +40,7 @@ app.use(
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 👇 Start handling routes here
-// Contrary to the views version, all routes are controled from the routes/index.js
+// Handling routes
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
@@ -57,12 +56,14 @@ app.use("/api", cloudinaryRoutes);
 const stripeRoutes = require("./routes/stripe.routes");
 app.use("/api", stripeRoutes);
 
-app.use((req, res, next) => {
-	// If no routes match, send them the React HTML.
-	res.sendFile(__dirname + "/public/index.html");
-});
+app.use(
+  (req, res, next) => {
+	  // If no routes match, send them the React HTML.
+	  res.sendFile(__dirname + "/public/index.html");
+    }
+  );
 
-// ❗ To handle errors. Routes that don"t exist or errors that you handle in specific routes
+// Error handling
 require("./error-handling")(app);
 
 module.exports = app;

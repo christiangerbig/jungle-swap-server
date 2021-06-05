@@ -1,11 +1,10 @@
 const router = require("express").Router();
-const stripe = require("stripe")("sk_test_51IQBseEqJqsi8ZD5vpPnmtVU1ioLHbi2tk0Miu0jFM6viogsy1xde5mYJTcVUQV0SnA3ubiDP6Hnl1KT9WR5ENql00cFLLAqPO");
-const calculateOrderAmount = items => {
-  // Replace this constant with a calculation of the order"s amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 1400;
+const stripe = require("stripe")("sk_test_51IQBsPA6EAM4YnfDx9U5G148b6vEJ1WADAczlAfKeu3xwWctEifxXJZ1oZDQZg6IoGZ0ByG5dPECpKDXNJ8pZtMG00DJjMEVbK");
+
+const calculateOrderAmount = (items) => {
+  return items * 100;
 };
+
 router.post(
   "/create-payment-intent", 
   async (req, res) => {
@@ -14,7 +13,7 @@ router.post(
     const paymentIntent = await stripe.paymentIntents.create(
       {
         amount: calculateOrderAmount(items),
-        currency: "usd"
+        currency: "eur"
       }
     );
     res.send(

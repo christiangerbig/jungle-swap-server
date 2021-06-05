@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-// 1. Define your schema
-let PlantSchema = new Schema(
+const PlantSchema = new Schema(
   {
     name: String,
     description: String,
@@ -26,8 +25,6 @@ let PlantSchema = new Schema(
   }
 );
 
-// 2. Define your model
-let PlantModel = model("plant", PlantSchema);
+const PlantModel = model("plant", PlantSchema);
 
-// 3. Export your Model with "module.exports"
 module.exports = PlantModel;
