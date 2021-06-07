@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const UserModel = require("../models/User.model");
 
+// POST Signup
 router.post(
   "/signup",
   (req, res) => {
@@ -48,7 +49,7 @@ router.post(
     )
       .then(
         (user) => {
-          // Ensuring that the hash is not shared as well with the user
+          // Ensuring that hash is not shared as well with user
           user.passwordHash = "***";
           res.status(200).json(user);
         }
@@ -76,7 +77,7 @@ router.post(
   }
 );
 
-// Handle all POST requests to http:localhost:5005/api/signin
+// POST Signin
 router.post(
   "/signin",
   (req, res) => {
@@ -152,7 +153,7 @@ router.post(
   }
 );
 
-// Handle all POST requests to http:localhost:5005/api/logout
+// POST Logout
 router.post(
   "/logout",
   (req, res) => {
@@ -165,7 +166,6 @@ router.post(
 // Middleware to check if user is loggedIn
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
-    // Call whatever is to be executed after the isLoggedIn function is over
     next()
   }
   else {
@@ -178,8 +178,7 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
-// Protected route
-// Handle all get requests to http:localhost:5005/api/user
+// GET protected route
 router.get(
   "/user",
   isLoggedIn,

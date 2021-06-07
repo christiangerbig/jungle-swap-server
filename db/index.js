@@ -1,8 +1,4 @@
-// Connection with mongodb
-// https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
-
-// Set MongoDB URI for app to have access to it
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/jungle-swap";
 
 mongoose.connect(

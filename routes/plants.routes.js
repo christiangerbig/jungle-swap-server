@@ -4,7 +4,7 @@ const uploader = require("../config/cloudinary.config.js");
 const PlantModel = require("../models/Plant.model");
 const RequestModel = require("../models/Request.model");
 
-// Handle GET All plants
+// GET All plants
 router.get(
   "/plants",
   (req, res) => {
@@ -27,7 +27,7 @@ router.get(
   }
 );
 
-// Handle GET Search plant
+// GET Search plant
 router.get(
   "/plants/search",
   (req, res) => {
@@ -57,7 +57,7 @@ router.get(
   }
 );
 
-// Handle POST Create plant
+// POST Create plant
 router.post(
   "/plants/create",
   (req, res) => {
@@ -90,7 +90,7 @@ router.post(
   }
 );
 
-// Handle GET Plant by id
+// GET Plant by id
 router.get(
   "/plants/:plantId",
   (req, res) => {
@@ -113,7 +113,7 @@ router.get(
   }
 );
 
-// Handle DELETE  plant
+// DELETE plant
 router.delete(
   "/plants/:id",
   (req, res) => {
@@ -136,7 +136,7 @@ router.delete(
   }
 );
 
-// Handle PATCH Edit plant
+// PATCH Plant
 router.patch(
   "/plants/:id",
   (req, res) => {
@@ -173,7 +173,7 @@ router.patch(
   }
 );
 
-// Handle POST Create request
+// POST Request
 router.post(
   "/plants/request",
   (req, res) => {
@@ -203,7 +203,7 @@ router.post(
   }
 );
 
-// Handle GET My requests
+// GET My requests
 router.get(
   "/myrequests",
   (req, res) => {

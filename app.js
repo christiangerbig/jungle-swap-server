@@ -1,20 +1,13 @@
-// Get access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
 require("dotenv/config");
-
-// Connect to the database
 require("./db");
 
-// Handle http requests
-// https://www.npmjs.com/package/express
 const express = require("express");
-
 const app = express();
 
-// Runs most middlewares
+// Run middlewares
 require("./config")(app);
 
-// Set up connect-mongo
+// Setup connect-mongo
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 
@@ -30,7 +23,7 @@ app.use(
       store: new MongoStore(
         {
           mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/jungle-swap",
-          ttl: 60 * 60 * 24, // In seconds. expiring in 1 day
+          ttl: 60 * 60 * 24, // In seconds expiring in 1 day
         }
       )
     }
@@ -40,7 +33,7 @@ app.use(
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Handling routes
+// Routes
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
@@ -58,7 +51,7 @@ app.use("/api", stripeRoutes);
 
 app.use(
   (req, res, next) => {
-	  // If no routes match, send them the React HTML.
+	  // If no routes match, send React HTML.
 	  res.sendFile(__dirname + "/public/index.html");
     }
   );

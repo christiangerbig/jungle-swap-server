@@ -13,13 +13,13 @@ cloudinary.config(
 const storage = new CloudinaryStorage(
   {
     cloudinary,
-    folder: "bananarama", // The name of the folder in cloudinary
+    folder: "bananarama", // Name of the folder in cloudinary
     allowedFormats: [
       "jpg", "png"
     ],
-    // params: { resource_type: "raw" }, => add this is in case you want to upload other type of files, not just images
+    // params: { resource_type: "raw" }, // Upload other type of files
     filename: (req, res, cb) => {
-      cb(null, res.originalname); // The file on cloudinary will have the same name as the original file name
+      cb(null, res.originalname); // File on cloudinary will have same name as original file
     }
   }
 );
