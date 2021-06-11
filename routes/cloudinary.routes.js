@@ -14,7 +14,7 @@ router.post(
     }
     res.status(200).json(
       { 
-        imagePublicId: req.file.filename,
+        imageId: req.file.filename,
         image: req.file.path 
       }
     );
