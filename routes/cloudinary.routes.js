@@ -25,8 +25,8 @@ router.post(
 router.post(
   "/destroy",
     (req, res, next) => {
-    let imageId = req.body.imageId;
-    uploader.destroy(imageId)
+    // let imageId = req.body.imageId;
+    uploader.destroy("jnu2y1o9hyn0v1ohxfp3")
       .then(
         (response) => {
           res.status(200).json(response);
