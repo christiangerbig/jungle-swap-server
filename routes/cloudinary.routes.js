@@ -4,7 +4,7 @@ const uploader = require("../config/cloudinary.config.js");
 
 router.post(
   "/upload", 
-  uploader.single("imageUrl"), 
+  uploader.single("image"), 
   (req, res, next) => {
     if (!req.file) {
       next(
@@ -12,7 +12,7 @@ router.post(
       );
       return;
     }
-    res.status(200).json({ image:req.file.path });
+    res.status(200).json({ image: req.file.path });
   }
 );
 
