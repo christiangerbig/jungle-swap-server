@@ -61,11 +61,12 @@ router.get(
 router.post(
   "/plants/create",
   (req, res) => {
-    const { name, description, location, image, size, price } = req.body;
+    const { name, description, location, imageId, image, size, price } = req.body;
     const newPlant = {
       name,
       description,
       size,
+      imageId,
       image,
       location,
       price,
@@ -141,11 +142,12 @@ router.patch(
   "/plants/:id",
   (req, res) => {
     let id = req.params.id;
-    const { name, description, size, location, image, price } = req.body;
+    const { name, description, size, location, imageId, image, price } = req.body;
     const updatedPlant = {
       name,
       description,
       size,
+      imageId,
       image,
       location,
       price

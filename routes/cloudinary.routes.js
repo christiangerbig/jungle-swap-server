@@ -21,4 +21,28 @@ router.post(
   }
 );
 
+
+router.post(
+  "/destroy",
+    (req, res, next) => {
+    let imageId = req.body.imageId;
+    uploader.destroy(imageId)
+      .then(
+        (response) => {
+          res.status(200).json(response);
+        }
+      )
+      .catch(
+        (err) => {
+          res.status(500).json(
+            {
+              error: "Delete image failed",
+              message: err
+            }
+          );
+        }
+      );
+  }
+);
+
 module.exports = router;
