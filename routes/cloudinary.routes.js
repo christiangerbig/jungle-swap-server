@@ -13,8 +13,10 @@ router.post(
       return;
     }
     res.status(200).json(
-      { imagePublicId: req.file.filename },
-      { image: req.file.path }
+      { 
+        imagePublicId: req.file.filename,
+        image: req.file.path 
+      }
     );
   }
 );
