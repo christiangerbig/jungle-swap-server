@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const uploader = require("../config/cloudinary.config.js");
+// const uploader = require("../config/cloudinary.config.js");
 const PlantModel = require("../models/Plant.model");
 const RequestModel = require("../models/Request.model");
 

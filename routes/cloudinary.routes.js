@@ -24,25 +24,26 @@ router.post(
 
 router.post(
   "/destroy",
-    (req, res, next) => {
-    // let imageId = req.body.imageId;
-    
-    uploader.destroy(`${process.env.APT_SECRET}` ,"jnu2y1o9hyn0v1ohxfp3")
-      .then(
-        (response) => {
-          res.status(200).json(response);
-        }
-      )
-      .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Delete image failed",
-              message: err
-            }
-          );
-        }
-      );
+  (req, res, next) => {
+      try {
+        const { imageId } = req.body;
+        router.destroy(
+          imageId,
+          async(err, result) => {
+            if (err) throw err;
+            res.json({ message: "Image deleted" })
+          }
+        )
+      }
+    catch
+      (err) {
+        res.status(500).json(
+          {
+            error: "Delete image failed",
+            message: err
+          }
+        )
+      }
   }
 );
 
