@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const uploader = require("../config/cloudinary.config.js");
 const PlantModel = require("../models/Plant.model");
 const RequestModel = require("../models/Request.model");
 
@@ -31,11 +30,12 @@ router.get(
 router.get(
   "/plants/search",
   (req, res) => {
-    let name = req.query.q
+    const name = req.query.q
     PlantModel.find(
       {
         name: {
-          $regex: `^${name}`, $options: "i"
+          $regex: `^${name}`,
+          $options: "i"
         }
       }
     )
@@ -61,12 +61,11 @@ router.get(
 router.post(
   "/plants/create",
   (req, res) => {
-    const { name, description, location, imageId, image, size, price } = req.body;
+    const { name, description, location, image, size, price } = req.body;
     const newPlant = {
       name,
       description,
       size,
-      imageId,
       image,
       location,
       price,
@@ -141,13 +140,12 @@ router.delete(
 router.patch(
   "/plants/:id",
   (req, res) => {
-    let id = req.params.id;
-    const { name, description, size, location, imageId, image, price } = req.body;
+    const id = req.params.id;
+    const { name, description, size, location, image, price } = req.body;
     const updatedPlant = {
       name,
       description,
       size,
-      imageId,
       image,
       location,
       price

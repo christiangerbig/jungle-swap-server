@@ -38,8 +38,8 @@ router.post(
     //   return;
     // }
     // Creating a salt 
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
     UserModel.create(
       {
         name: username,
@@ -67,7 +67,7 @@ router.post(
           else {
             res.status(500).json(
               {
-                error: "Something went wrong! Go to sleep!",
+                error: "Something went wrong!",
                 message: err
               }
             );

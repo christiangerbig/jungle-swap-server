@@ -14,39 +14,9 @@ router.post(
     }
     res.status(200).json(
       { 
-        imageId: req.file.filename,
         image: req.file.path 
       }
     );
-  }
-);
-
-
-router.post(
-  "/destroy",
-  (req, res) => {
-    const { imageId } = req.body;
-    uploader.destroy(imageId)
-      .then(
-        () => {
-          res.json(
-            { 
-              message: "Image deleted" 
-            }
-          );
-        }
-      )
-      .catch(
-        (err) => {
-          console.log("testtest");
-          res.status(500).json(
-            {
-              error: "Delete image failed",
-              message: err
-            }
-          );
-        }
-      )
   }
 );
 
