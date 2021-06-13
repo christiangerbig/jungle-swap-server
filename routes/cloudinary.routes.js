@@ -27,7 +27,8 @@ router.post(
   (req, res, next) => {
       try {
         const { imageId } = req.body;
-        router.destroy(
+        console.log(imageId);
+        uploader.destroy(
           imageId,
           async(err, result) => {
             if (err) throw err;
