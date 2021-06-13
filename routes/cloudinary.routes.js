@@ -27,7 +27,6 @@ router.post(
   (req, res, next) => {
       try {
         const { imageId } = req.body;
-        console.log(imageId);
         uploader.destroy(
           imageId,
           async(err, result) => {
@@ -38,6 +37,7 @@ router.post(
       }
     catch
       (err) {
+        console.log("testtest");
         res.status(500).json(
           {
             error: "Delete image failed",
