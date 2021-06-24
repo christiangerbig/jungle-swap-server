@@ -17,7 +17,7 @@ router.post(
       );
       return;
     }
-    // // Email validation
+    // Email validation
      const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
      if (!emailRegExp.test(email)) {
        res.status(500).json(
@@ -27,16 +27,16 @@ router.post(
        );
        return;
      }
-    // // Password validation
-    // const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
-    // if (!passwordRegExp.test(password)) {
-    //   res.status(500).json(
-    //     {
-    //       error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"
-    //     }
-    //   );
-    //   return;
-    // }
+    // Password validation
+     const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+     if (!passwordRegExp.test(password)) {
+       res.status(500).json(
+         {
+           error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"
+         }
+       );
+       return;
+     }
     // Creating a salt 
     const salt = bcrypt.genSaltSync(10);
     const passwordHash = bcrypt.hashSync(password, salt);
