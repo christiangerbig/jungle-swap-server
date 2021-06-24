@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const RequestModel = require("../models/Request.model");
 
-// GET Requests
+// GET Fetch all requests
 router.get(
-  "/requests",
+  "/requests/fetch",
   (req, res) => {
     RequestModel.find({})
       .then(

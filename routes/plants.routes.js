@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const PlantModel = require("../models/Plant.model");
 
-// GET All plants
+// GET Fetch all plants
 router.get(
-  "/plants",
+  "/plants/fetch",
   (req, res) => {
     PlantModel.find()
       .then(
@@ -78,7 +78,7 @@ router.post(
   }
 );
 
-// GET Plant
+// GET Single plant
 router.get(
   "/plants/read/:plantId",
   (req, res) => {
@@ -90,25 +90,6 @@ router.get(
         (err) => res.status(500).json(
           {
             error: "Read plant failed",
-            message: err
-          }
-        )
-      );
-  }
-);
-
-// DELETE plant
-router.delete(
-  "/plants/delete/:id",
-  (req, res) => {
-    PlantModel.findByIdAndDelete(req.params.id)
-      .then(
-        (response) => res.status(200).json(response)
-      )
-      .catch(
-        (err) => res.status(500).json(
-          {
-            error: "Delete plant failed",
             message: err
           }
         )
@@ -142,6 +123,25 @@ router.patch(
         (err) => res.status(500).json(
           {
             error: "Update plant failed",
+            message: err
+          }
+        )
+      );
+  }
+);
+
+// DELETE plant
+router.delete(
+  "/plants/delete/:id",
+  (req, res) => {
+    PlantModel.findByIdAndDelete(req.params.id)
+      .then(
+        (response) => res.status(200).json(response)
+      )
+      .catch(
+        (err) => res.status(500).json(
+          {
+            error: "Delete plant failed",
             message: err
           }
         )
