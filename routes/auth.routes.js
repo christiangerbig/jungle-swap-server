@@ -18,18 +18,18 @@ router.post(
       return;
     }
     // // Email validation
-    // const myRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
-    // if (!myRegex.test(email)) {
-    //   res.status(500).json(
-    //     {
-    //       error: "Email format not correct"
-    //     }
-    //   );
-    //   return;
-    // }
+     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
+     if (!emailRegExp.test(email)) {
+       res.status(500).json(
+         {
+           error: "Email format not correct"
+         }
+       );
+       return;
+     }
     // // Password validation
-    // const myPassRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
-    // if (!myPassRegex.test(password)) {
+    // const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+    // if (!passwordRegExp.test(password)) {
     //   res.status(500).json(
     //     {
     //       error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"
@@ -39,12 +39,12 @@ router.post(
     // }
     // Creating a salt 
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
+    const passwordHash = bcrypt.hashSync(password, salt);
     UserModel.create(
       {
-        name: username,
+        username,
         email,
-        passwordHash: hash
+        passwordHash
       }
     )
       .then(
@@ -67,7 +67,7 @@ router.post(
           else {
             res.status(500).json(
               {
-                error: "Something went wrong!",
+                error: "Error while creating user",
                 message: err
               }
             );
@@ -92,8 +92,8 @@ router.post(
       return;
     }
     // Valid email
-    const myRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
-    if (!myRegex.test(email)) {
+    const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
+    if (!emailRegExp.test(email)) {
       res.status(500).json(
         {
           error: "Email format not correct"
@@ -182,7 +182,7 @@ const isLoggedIn = (req, res, next) => {
 router.get(
   "/user",
   isLoggedIn,
-  (req, res, next) => {
+  (req, res) => {
     res.status(200).json(req.session.loggedInUser);
   }
 );
