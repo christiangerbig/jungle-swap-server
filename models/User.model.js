@@ -13,10 +13,6 @@ const UserSchema = new Schema(
     passwordHash: {
       type: String,
       required: true
-    },
-    image: {
-      type: String,
-      default: "https://i.pinimg.com/originals/b7/21/26/b721265eb826b20e6f91d6643b95c122.jpg"
     }
   }
 );

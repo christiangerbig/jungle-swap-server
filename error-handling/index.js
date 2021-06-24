@@ -1,7 +1,6 @@
 module.exports = (app) => {
   app.use(
     (req, res, next) => {
-      // Requested page is not available
       res.status(404).json({ errorMessage: "This route does not exist" });
     }
   );

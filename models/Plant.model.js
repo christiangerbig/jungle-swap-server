@@ -5,10 +5,7 @@ const PlantSchema = new Schema(
     name: String,
     description: String,
     size: Number,
-    image: {
-      type: String,
-      default: "https://i.pinimg.com/originals/b7/21/26/b721265eb826b20e6f91d6643b95c122.jpg"
-    },
+    image: String,
     location: {
       type: String,
       enum: [
