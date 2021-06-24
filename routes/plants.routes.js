@@ -9,19 +9,15 @@ router.get(
   (req, res) => {
     PlantModel.find()
       .then(
-        (plants) => {
-          res.status(200).json(plants);
-        }
+        (plants) => res.status(200).json(plants)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Find all plants failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Find all plants failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -40,19 +36,15 @@ router.get(
       }
     )
       .then(
-        (plants) => {
-          res.status(200).json(plants);
-        }
+        (plants) => res.status(200).json(plants)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Search plant failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Search plant failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -74,19 +66,15 @@ router.post(
     };
     PlantModel.create(newPlant)
       .then(
-        (response) => {
-          res.status(200).json(response);
-        }
+        (response) => res.status(200).json(response)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Create plant failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Create plant failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -97,19 +85,15 @@ router.get(
   (req, res) => {
     PlantModel.findById(req.params.plantId)
       .then(
-        (response) => {
-          res.status(200).json(response);
-        }
+        (response) => res.status(200).json(response)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Read plant failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Read plant failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -120,19 +104,15 @@ router.delete(
   (req, res) => {
     PlantModel.findByIdAndDelete(req.params.id)
       .then(
-        (response) => {
-          res.status(200).json(response);
-        }
+        (response) => res.status(200).json(response)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Delete plant failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Delete plant failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -157,19 +137,15 @@ router.patch(
       { new: true }
     )
       .then(
-        (response) => {
-          res.status(200).json(response);
-        }
+        (response) => res.status(200).json(response)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Update plant failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Update plant failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -187,19 +163,15 @@ router.post(
     }
     RequestModel.create(request)
       .then(
-        (response) => {
-          res.status(200).json(response);
-        }
+        (response) => res.status(200).json(response)
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Create request failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Create request failed",
+            message: err
+          }
+        )
       );
   }
 );
@@ -216,14 +188,12 @@ router.get(
         }
       )
       .catch(
-        (err) => {
-          res.status(500).json(
-            {
-              error: "Get requests failed",
-              message: err
-            }
-          );
-        }
+        (err) => res.status(500).json(
+          {
+            error: "Get requests failed",
+            message: err
+          }
+        )
       );
   }
 );

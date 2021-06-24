@@ -49,13 +49,9 @@ const stripeRoutes = require("./routes/stripe.routes");
 app.use("/api", stripeRoutes);
 
 app.use(
-  (req, res) => {
-	  // If no routes match, send React HTML.
-	  res.sendFile(__dirname + "/public/index.html");
-    }
-  );
+  (req, res) => res.sendFile(__dirname + "/public/index.html")  // If no routes match, send React HTML.
+);
 
-// Error handling
-require("./error-handling")(app);
+require("./error-handling")(app); // Error handling
 
 module.exports = app;

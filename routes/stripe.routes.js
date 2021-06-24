@@ -17,11 +17,7 @@ router.post(
         currency: "eur"
       }
     );
-    res.send(
-      {
-        clientSecret: paymentIntent.client_secret
-      }
-    );
+    res.send({ clientSecret: paymentIntent.client_secret });
   }
 );
 

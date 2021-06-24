@@ -10,31 +10,19 @@ router.post(
     const { username, email, password } = req.body;
     // Server side validation
     if (!username || !email || !password) {
-      res.status(500).json(
-        {
-          error: "Please enter username, email and password"
-        }
-      );
+      res.status(500).json({ error: "Please enter username, email and password" });
       return;
     }
     // Email validation
      const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
      if (!emailRegExp.test(email)) {
-       res.status(500).json(
-         {
-           error: "Email format not correct"
-         }
-       );
+       res.status(500).json({ error: "Email format not correct" });
        return;
      }
     // Password validation
      const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
      if (!passwordRegExp.test(password)) {
-       res.status(500).json(
-         {
-           error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"
-         }
-       );
+       res.status(500).json({ error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet" });
        return;
      }
     // Creating a salt 
@@ -58,7 +46,7 @@ router.post(
         (err) => {
           if (err.code === 11000) {
             res.status(500).json(
-              {
+              { 
                 error: "Username or email entered already exists!",
                 message: err
               }
@@ -84,21 +72,13 @@ router.post(
     const { email, password } = req.body;
     // Server side validation
     if (!email || !password) {
-      res.status(500).json(
-        {
-          error: "Please enter email and password"
-        }
-      );
+      res.status(500).json({ error: "Please enter email and password" });
       return;
     }
     // Valid email
     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
     if (!emailRegExp.test(email)) {
-      res.status(500).json(
-        {
-          error: "Email format not correct"
-        }
-      );
+      res.status(500).json({ error: "Email format not correct" });
       return;
     }
     // Look up if the user exists in the database
@@ -117,22 +97,14 @@ router.post(
                 }
                 // If passwords do not match
                 else {
-                  res.status(500).json(
-                    {
-                      error: "Passwords don\"t match"
-                    }
-                  );
+                  res.status(500).json({ error: "Passwords don\"t match" });
                   return;
                 }
               }
             )
             .catch(
               () => {
-                res.status(500).json(
-                  {
-                    error: "Email format not correct"
-                  }
-                );
+                res.status(500).json({ error: "Email format not correct" });
                 return;
               }
             );
@@ -158,8 +130,7 @@ router.post(
   "/logout",
   (req, res) => {
     req.session.destroy();
-    // Nothing to send back to the user
-    res.status(204).json({});
+    res.status(204).json({}); // Nothing to send back to the user
   }
 );
 
