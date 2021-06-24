@@ -22,7 +22,7 @@ app.use(
       store: new MongoStore(
         {
           mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/jungle-swap",
-          ttl: 60 * 60 * 24, // In seconds expiring in 1 day
+          ttl: 60 * 60 * 24 // In seconds expiring in 1 day
         }
       )
     }
@@ -41,6 +41,9 @@ app.use("/api", authRoutes);
 
 const plantsRoutes = require("./routes/plants.routes");
 app.use("/api", plantsRoutes);
+
+const messagesRoutes = require("./routes/messages.routes");
+app.use("/api", messagesRoutes);
 
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 app.use("/api", cloudinaryRoutes);
