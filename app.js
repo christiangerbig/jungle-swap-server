@@ -7,7 +7,6 @@ const app = express();
 // Run middlewares
 require("./config")(app);
 
-// Setup connect-mongo
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 
@@ -30,8 +29,8 @@ app.use(
   )
 );
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 const allRoutes = require("./routes");
@@ -50,7 +49,7 @@ const stripeRoutes = require("./routes/stripe.routes");
 app.use("/api", stripeRoutes);
 
 app.use(
-  (req, res, next) => {
+  (req, res) => {
 	  // If no routes match, send React HTML.
 	  res.sendFile(__dirname + "/public/index.html");
     }

@@ -8,7 +8,7 @@ router.post(
   (req, res, next) => {
     if (!req.file) {
       next(
-        new Error("No file uploaded!")
+        new Error("No image file uploaded!")
       );
       return;
     }

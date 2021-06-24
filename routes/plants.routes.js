@@ -17,7 +17,7 @@ router.get(
         (err) => {
           res.status(500).json(
             {
-              error: "Find plant failed",
+              error: "Find all plants failed",
               message: err
             }
           );
@@ -61,7 +61,8 @@ router.get(
 router.post(
   "/plants/create",
   (req, res) => {
-    const { name, description, location, image, size, price } = req.body;
+    const { creator } = req.session.loggedInUser._id;
+    const { name, description, size, image, location, price } = req.body;
     const newPlant = {
       name,
       description,
@@ -69,7 +70,7 @@ router.post(
       image,
       location,
       price,
-      creator: req.session.loggedInUser._id
+      creator
     };
     PlantModel.create(newPlant)
       .then(
@@ -90,9 +91,9 @@ router.post(
   }
 );
 
-// GET Plant by id
+// GET Plant
 router.get(
-  "/plants/:plantId",
+  "/plants/read/:plantId",
   (req, res) => {
     PlantModel.findById(req.params.plantId)
       .then(
@@ -104,7 +105,7 @@ router.get(
         (err) => {
           res.status(500).json(
             {
-              error: "Edit plant failed",
+              error: "Read plant failed",
               message: err
             }
           );
@@ -115,7 +116,7 @@ router.get(
 
 // DELETE plant
 router.delete(
-  "/plants/:id",
+  "/plants/delete/:id",
   (req, res) => {
     PlantModel.findByIdAndDelete(req.params.id)
       .then(
@@ -136,9 +137,9 @@ router.delete(
   }
 );
 
-// PATCH Plant
+// PATCH Update plant
 router.patch(
-  "/plants/:id",
+  "/plants/update/:id",
   (req, res) => {
     const id = req.params.id;
     const { name, description, size, location, image, price } = req.body;
