@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 
+require("/.User.model");
+
 const PlantSchema = new Schema(
   {
     name: String,
@@ -17,7 +19,7 @@ const PlantSchema = new Schema(
     price: Number,
     creator: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "user"
     }
   }
 );

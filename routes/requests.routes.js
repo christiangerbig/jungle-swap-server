@@ -7,6 +7,7 @@ router.get(
   "/requests/fetch",
   (req, res) => {
     RequestModel.find({})
+      .populate("buyer", "seller")
       .then(
         (requests) => {
           console.log("Requests server", requests);
@@ -28,7 +29,7 @@ router.get(
 router.post(
   "/requests/create",
   (req, res) => {
-    const buyer = req.session.loggedInUser;
+    const buyer = req.session.loggedInUser._id;
     const { message, seller, plant } = req.body;
     const newRequest = {
       buyer,

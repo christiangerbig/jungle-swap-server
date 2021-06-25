@@ -1,14 +1,16 @@
 const { Schema, model } = require("mongoose");
 
+require("/.User.model");
+
 const RequestSchema = new Schema(
   {
     buyer: {
       type: Schema.Types.ObjectId, 
-      ref: "User"
+      ref: "user"
     },
     seller: {
       type: Schema.Types.ObjectId, 
-      ref: "User"
+      ref: "user"
     },
     plant: Object,
     message: String

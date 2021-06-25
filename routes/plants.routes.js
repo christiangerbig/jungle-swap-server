@@ -7,6 +7,7 @@ router.get(
   "/plants/fetch",
   (req, res) => {
     PlantModel.find()
+      .populate("creator")
       .then(
         (plants) => res.status(200).json(plants)
       )
@@ -34,6 +35,7 @@ router.get(
         }
       }
     )
+      .populate("creator")
       .then(
         (plants) => res.status(200).json(plants)
       )
@@ -52,7 +54,7 @@ router.get(
 router.post(
   "/plants/create",
   (req, res) => {
-    const creator = req.session.loggedInUser;
+    const creator = req.session.loggedInUser._id;
     const { name, description, size, image, location, price } = req.body;
     const newPlant = {
       name,
@@ -83,6 +85,7 @@ router.get(
   "/plants/read/:plantId",
   (req, res) => {
     PlantModel.findById(req.params.plantId)
+      .populate("creator")
       .then(
         (response) => res.status(200).json(response)
       )
