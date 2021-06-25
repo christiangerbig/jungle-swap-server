@@ -28,7 +28,8 @@ router.get(
 router.post(
   "/requests/create",
   (req, res) => {
-    const { message, buyer, seller, plant } = req.body;
+    const buyer = req.session.loggedInUser;
+    const { message, seller, plant } = req.body;
     const newRequest = {
       buyer,
       seller,

@@ -52,7 +52,7 @@ router.get(
 router.post(
   "/plants/create",
   (req, res) => {
-    const creator = req.session.loggedInUser._id;
+    const creator = req.session.loggedInUser;
     const { name, description, size, image, location, price } = req.body;
     const newPlant = {
       name,
