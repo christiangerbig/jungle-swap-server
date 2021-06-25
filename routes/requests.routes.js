@@ -7,7 +7,8 @@ router.get(
   "/requests/fetch",
   (req, res) => {
     RequestModel.find({})
-      .populate("buyer", "seller")
+      .populate("buyer")
+      .populate("seller")
       .then(
         (requests) => {
           console.log("Requests server", requests);
