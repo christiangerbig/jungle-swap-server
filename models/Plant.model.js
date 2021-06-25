@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-require("/.User.model");
+require("./User.model");
 
 const PlantSchema = new Schema(
   {
