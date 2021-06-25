@@ -3,10 +3,12 @@ const { Schema, model } = require("mongoose");
 const RequestSchema = new Schema(
   {
     buyer: {
-      type: Schema.Types.ObjectId, ref: "User"
+      type: Schema.Types.ObjectId, 
+      ref: "User"
     },
     seller: {
-      type: Schema.Types.ObjectId, ref: "User"
+      type: Schema.Types.ObjectId, 
+      ref: "User"
     },
     plant: Object,
     message: String

@@ -42,8 +42,8 @@ app.use("/api", authRoutes);
 const plantsRoutes = require("./routes/plants.routes");
 app.use("/api", plantsRoutes);
 
-const messagesRoutes = require("./routes/messages.routes");
-app.use("/api", messagesRoutes);
+const requestsRoutes = require("./routes/requests.routes");
+app.use("/api", requestsRoutes);
 
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 app.use("/api", cloudinaryRoutes);
