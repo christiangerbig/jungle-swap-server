@@ -6,7 +6,7 @@ const calculateOrderAmount = (price) => {
   return price * 100; // Comma correction
 };
 
-// Create PaymentIntent with order amount and currency
+// Create payment intent with order amount and currency
 router.post(
   "/create-payment-intent", 
   async (req, res) => {
