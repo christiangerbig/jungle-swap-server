@@ -57,7 +57,7 @@ router.post(
     const creator = req.session.loggedInUser._id;
     const { name, description, size, image, location, price } = req.body;
     // Server side validation
-    if (!name || !description || !size || !location || !price) {
+    if (!name || !description || !size || (location === "Select location") || !price) {
       res.status(500).json({ error: "Please enter name, description, size, location and price" });
       return;
     }
