@@ -18,9 +18,7 @@ const storage = new CloudinaryStorage(
       "jpg", "png"
     ],
     // params: { resource_type: "raw" }, // Upload other type of files
-    filename: (req, res, cb) => {
-      cb(null, res.originalname); // File on cloudinary will have same name as original file
-    }
+    filename: (req, res, cb) => cb(null, res.originalname) // File on cloudinary will have same name as original file
   }
 );
 
