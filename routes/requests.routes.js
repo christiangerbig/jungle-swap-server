@@ -57,11 +57,32 @@ router.post(
   }
 );
 
+// GET Single request
+router.get(
+  "/requests/read/:requestId",
+  (req, res) => {
+    RequestModel.findById(req.params.requestId)
+      .populate("buyer")
+      .populate("seller")
+      .then(
+        (response) => res.status(200).json(response)
+      )
+      .catch(
+        (err) => res.status(500).json(
+          {
+            error: "Read request failed",
+            message: err
+          }
+        )
+      );
+  }
+);
+
 // PATCH Update request
 router.patch(
-  "/requests/update/:id",
+  "/requests/update/:requestId",
   (req, res) => {
-    const id = req.params.id;
+    const id = req.params.requestId;
     const { buyer, seller, plant, message, reply } = req.body;
     const updatedRequest = {
       buyer,
@@ -91,9 +112,9 @@ router.patch(
 
 // DELETE request
 router.delete(
-  "/requests/delete/:id",
+  "/requests/delete/:requestId",
   (req, res) => {
-    RequestModel.findByIdAndDelete(req.params.id)
+    RequestModel.findByIdAndDelete(req.params.requestId)
       .then(
         (response) => res.status(200).json(response)
       )

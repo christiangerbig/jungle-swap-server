@@ -107,9 +107,9 @@ router.get(
 
 // PATCH Update plant
 router.patch(
-  "/plants/update/:id",
+  "/plants/update/:plantId",
   (req, res) => {
-    const id = req.params.id;
+    const id = req.params.plantId;
     const { name, description, size, location, image, price } = req.body;
     const updatedPlant = {
       name,
@@ -140,9 +140,9 @@ router.patch(
 
 // DELETE plant
 router.delete(
-  "/plants/delete/:id",
+  "/plants/delete/:plantId",
   (req, res) => {
-    PlantModel.findByIdAndDelete(req.params.id)
+    PlantModel.findByIdAndDelete(req.params.plantId)
       .then(
         (response) => res.status(200).json(response)
       )
