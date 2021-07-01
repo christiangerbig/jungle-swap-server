@@ -58,4 +58,23 @@ router.post(
   }
 );
 
+// DELETE request
+router.delete(
+  "/requests/delete/:id",
+  (req, res) => {
+    RequestModel.findByIdAndDelete(req.params.id)
+      .then(
+        (response) => res.status(200).json(response)
+      )
+      .catch(
+        (err) => res.status(500).json(
+          {
+            error: "Delete request failed",
+            message: err
+          }
+        )
+      );
+  }
+);
+
 module.exports = router;
