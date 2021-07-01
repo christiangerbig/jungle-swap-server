@@ -13,7 +13,8 @@ const RequestSchema = new Schema(
       ref: "user"
     },
     plant: Object,
-    message: String
+    message: String,
+    reply: String
   }
 );
 
