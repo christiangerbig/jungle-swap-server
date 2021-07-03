@@ -9,6 +9,7 @@ router.get(
     RequestModel.find({})
       .populate("buyer")
       .populate("seller")
+      .populate("plant")
       .then(
         (requests) => res.status(200).json(requests)
       )
@@ -64,6 +65,7 @@ router.get(
     RequestModel.findById(req.params.requestId)
       .populate("buyer")
       .populate("seller")
+      .populate("plant")
       .then(
         (response) => res.status(200).json(response)
       )

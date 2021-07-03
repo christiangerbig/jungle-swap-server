@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 require("./User.model");
+require("./Plant.model");
 
 const RequestSchema = new Schema(
   {
@@ -12,7 +13,10 @@ const RequestSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: "user"
     },
-    plant: Object,
+    plant: {
+      type: Schema.Types.ObjectId, 
+      ref: "plant"
+    },
     message: String,
     reply: String
   }
