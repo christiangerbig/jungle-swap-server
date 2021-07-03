@@ -6,7 +6,7 @@ const RequestModel = require("../models/Request.model");
 router.get(
   "/requests/fetch",
   (req, res) => {
-    RequestModel.find({})
+    RequestModel.find()
       .populate("buyer")
       .populate("seller")
       .populate("plant")
