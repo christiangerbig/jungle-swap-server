@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.af90223d.chunk.css",
-    "main.js": "/static/js/main.2b8e5088.chunk.js",
-    "main.js.map": "/static/js/main.2b8e5088.chunk.js.map",
+    "main.css": "/static/css/main.d88896d2.chunk.css",
+    "main.js": "/static/js/main.621ca473.chunk.js",
+    "main.js.map": "/static/js/main.621ca473.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.96166cf3.js",
     "runtime-main.js.map": "/static/js/runtime-main.96166cf3.js.map",
     "static/css/2.150d169a.chunk.css": "/static/css/2.150d169a.chunk.css",
-    "static/js/2.fe13f39e.chunk.js": "/static/js/2.fe13f39e.chunk.js",
-    "static/js/2.fe13f39e.chunk.js.map": "/static/js/2.fe13f39e.chunk.js.map",
+    "static/js/2.db0367e1.chunk.js": "/static/js/2.db0367e1.chunk.js",
+    "static/js/2.db0367e1.chunk.js.map": "/static/js/2.db0367e1.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.150d169a.chunk.css.map": "/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.af90223d.chunk.css.map": "/static/css/main.af90223d.chunk.css.map",
-    "static/js/2.fe13f39e.chunk.js.LICENSE.txt": "/static/js/2.fe13f39e.chunk.js.LICENSE.txt",
+    "static/css/main.d88896d2.chunk.css.map": "/static/css/main.d88896d2.chunk.css.map",
+    "static/js/2.db0367e1.chunk.js.LICENSE.txt": "/static/js/2.db0367e1.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/JungleSwap_Lost.15e05066.jpg",
     "static/media/JungleSwap_Home.c4ed9b4c.png": "/static/media/JungleSwap_Home.c4ed9b4c.png",
     "static/media/JungleSwap_Icon.a6c7c44a.png": "/static/media/JungleSwap_Icon.a6c7c44a.png"
@@ -19,8 +19,8 @@
   "entrypoints": [
     "static/js/runtime-main.96166cf3.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.fe13f39e.chunk.js",
-    "static/css/main.af90223d.chunk.css",
-    "static/js/main.2b8e5088.chunk.js"
+    "static/js/2.db0367e1.chunk.js",
+    "static/css/main.d88896d2.chunk.css",
+    "static/js/main.621ca473.chunk.js"
   ]
 }
