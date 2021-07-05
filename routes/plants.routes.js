@@ -26,7 +26,7 @@ router.get(
 router.get(
   "/plants/search",
   (req, res) => {
-    const name = req.query.q
+    const name = req.query.q;
     PlantModel.find(
       {
         name: {
@@ -55,12 +55,9 @@ router.post(
   "/plants/create",
   (req, res) => {
     const creator = req.session.loggedInUser._id;
-    const { name, description, size, image, location, price } = req.body;
+    const {name, description, size, image, location, price} = req.body;
     // Server side validation
-    if (!name || !description || !size || (location === "Select location") || !price) {
-      res.status(500).json({ error: "Please enter name, description, size, location and price" });
-      return;
-    }
+    if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({error: "Please enter name, description, size, location and price"});
     const newPlant = {
       name,
       description,
@@ -89,7 +86,8 @@ router.post(
 router.get(
   "/plants/read/:plantId",
   (req, res) => {
-    PlantModel.findById(req.params.plantId)
+    const plantId = req.params.plantId;
+    PlantModel.findById(plantId)
       .populate("creator")
       .then(
         (response) => res.status(200).json(response)
@@ -109,8 +107,8 @@ router.get(
 router.patch(
   "/plants/update/:plantId",
   (req, res) => {
-    const id = req.params.plantId;
-    const { name, description, size, location, image, price } = req.body;
+    const plantId = req.params.plantId;
+    const {name, description, size, location, image, price} = req.body;
     const updatedPlant = {
       name,
       description,
@@ -120,9 +118,9 @@ router.patch(
       price
     };
     PlantModel.findByIdAndUpdate(
-      id, 
-      { $set: updatedPlant }, 
-      { new: true }
+      plantId, 
+      {$set: updatedPlant}, 
+      {new: true}
     )
       .then(
         (response) => res.status(200).json(response)
@@ -142,7 +140,8 @@ router.patch(
 router.delete(
   "/plants/delete/:plantId",
   (req, res) => {
-    PlantModel.findByIdAndDelete(req.params.plantId)
+    const plantId = req.params.plantId;
+    PlantModel.findByIdAndDelete(plantId)
       .then(
         (response) => res.status(200).json(response)
       )

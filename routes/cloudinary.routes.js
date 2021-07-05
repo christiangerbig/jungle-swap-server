@@ -7,7 +7,7 @@ router.post(
   "/upload", 
   uploader.single("image"), 
   (req, res) => {
-    if (!req.file) return res.status(500).json({ error: "Please choose an image" })
+    if (!req.file) return res.status(500).json({error: "Please choose an image"});
     res.status(200).json(
       {
         imagePublicId: req.file.filename,
@@ -22,18 +22,18 @@ router.post(
   "/destroy",
   (req, res) => {
     try {
-      const { public_id } = req.body;
-      if (!public_id) return res.status(400).json({ error: "No image chosen" })
+      const {public_id} = req.body;
+      if (!public_id) return res.status(400).json({error: "No image chosen"});
       uploader.destroy(
         public_id, 
         async(err, result) => {
           if(err) throw err;
-          res.json({ msg: "Image deleted" });
+          res.json({msg: "Image deleted"});
         }
       );
     } 
     catch (err) {
-      return res.status(500).json({ error: err.message });
+      return res.status(500).json({error: err.message});
     }
   }
 );

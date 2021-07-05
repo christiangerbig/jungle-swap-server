@@ -4,20 +4,20 @@ const stripe = require("stripe")("sk_test_51IQBsPA6EAM4YnfDx9U5G148b6vEJ1WADAczl
 // Calculate price
 const calculateOrderAmount = (price) => {
   return price * 100; // Comma correction
-};
+}
 
 // Create payment intent with order amount and currency
 router.post(
   "/create-payment-intent", 
   async (req, res) => {
-    const { price } = req.body;
+    const {price} = req.body;
     const paymentIntent = await stripe.paymentIntents.create(
       {
         amount: calculateOrderAmount(price),
         currency: "eur"
       }
     );
-    res.send({ clientSecret: paymentIntent.client_secret });
+    res.send({clientSecret: paymentIntent.client_secret});
   }
 );
 

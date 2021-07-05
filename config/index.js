@@ -24,6 +24,6 @@ module.exports = (app) => {
 
   // Access to `body` property in request
   app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+  app.use(express.urlencoded({extended: false}));
   app.use(cookieParser());
 };

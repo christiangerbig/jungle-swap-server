@@ -29,13 +29,10 @@ router.post(
   "/requests/create",
   (req, res) => {
     const buyer = req.session.loggedInUser._id;
-    const { message, seller, plant } = req.body;
+    const {message, seller, plant} = req.body;
     const reply = "";
     // Server side validation
-    if (!message) {
-      res.status(500).json({ error: "Please enter message text" });
-      return;
-    }
+    if (!message) return res.status(500).json({error: "Please enter message text"});
     const newRequest = {
       buyer,
       seller,
@@ -62,7 +59,8 @@ router.post(
 router.get(
   "/requests/read/:requestId",
   (req, res) => {
-    RequestModel.findById(req.params.requestId)
+    const requestId = req.params.requestId; 
+    RequestModel.findById(requestId)
       .populate("buyer")
       .populate("seller")
       .populate("plant")
@@ -84,8 +82,8 @@ router.get(
 router.patch(
   "/requests/update/:requestId",
   (req, res) => {
-    const id = req.params.requestId;
-    const { buyer, seller, plant, message, reply } = req.body;
+    const requestId = req.params.requestId; 
+    const {buyer, seller, plant, message, reply} = req.body;
     const updatedRequest = {
       buyer,
       seller,
@@ -94,9 +92,9 @@ router.patch(
       reply
     };
     RequestModel.findByIdAndUpdate(
-      id, 
-      { $set: updatedRequest }, 
-      { new: true }
+      requestId, 
+      {$set: updatedRequest}, 
+      {new: true}
     )
       .then(
         (response) => res.status(200).json(response)
@@ -116,7 +114,8 @@ router.patch(
 router.delete(
   "/requests/delete/:requestId",
   (req, res) => {
-    RequestModel.findByIdAndDelete(req.params.requestId)
+    const requestId = req.params.requestId; 
+    RequestModel.findByIdAndDelete(requestId)
       .then(
         (response) => res.status(200).json(response)
       )
