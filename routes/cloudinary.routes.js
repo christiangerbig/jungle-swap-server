@@ -20,22 +20,12 @@ router.post(
 // Delete image
 router.post(
   "/destroy",
+  uploader.destroy("g0nmildklkor3gjljnws"),
   (req, res) => {
-    try {
-      const { public_id } = req.body;
-      if (!public_id) return res.status(400).json({ error: "No image chosen" })
-      uploader.destroy(
-        "g0nmildklkor3gjljnws", 
-        async(err, result) => {
-          if(err) throw err;
-          res.json({ msg: "Image deleted" });
-        }
-      );
-    } 
-    catch (err) {
-      return res.status(500).json({ error: err.message });
-    }
+    const { public_id } = req.body;
+    //if (!public_id) return res.status(400).json({ error: "No image chosen" })
   }
+
 );
 
 module.exports = router;
