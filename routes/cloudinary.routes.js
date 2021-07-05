@@ -24,12 +24,13 @@ router.post(
     try {
       const { public_id } = req.body;
       if (!public_id) return res.status(400).json({ error: "No image chosen" })
-      cloudinary.v2.uploader.destroy(
+      uploader.destroy(
         public_id, 
-        async(err, result) => {
+        /*async(err, result) => {
           if(err) throw err;
           res.json({ msg: "Image deleted" });
-        }
+        }*/
+        result => { return result}
       );
     } 
     catch (err) {
