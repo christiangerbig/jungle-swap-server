@@ -8,7 +8,12 @@ router.post(
   uploader.single("image"), 
   (req, res) => {
     if (!req.file) return res.status(500).json({ error: "Please choose an image" })
-    res.status(200).json({ image: req.file.path });
+    res.status(200).json(
+      {
+        imagePublicId: req.file.filename,
+        image: req.file.path 
+      }
+    );
   }
 );
 
