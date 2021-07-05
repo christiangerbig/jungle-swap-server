@@ -25,7 +25,7 @@ router.post(
       //const { public_id } = req.body;
       //if (!public_id) return res.status(400).json({ error: "No image chosen" })
 
-      uploader.destroy(`${process.env.CLOUDINARY.split(' ')[3]}/${"g0nmildklkor3gjljnws"}`)
+      uploader.destroy(`${process.env.CLOUD.split(' ')[3]}/${"g0nmildklkor3gjljnws"}`)
 
       //const public_id = "g0nmildklkor3gjljnws";
       //uploader.destroy(
