@@ -20,12 +20,22 @@ router.post(
 // Delete image
 router.post(
   "/destroy",
-  uploader.destroy("g0nmildklkor3gjljnws"),
   (req, res) => {
-    const { public_id } = req.body;
-    //if (!public_id) return res.status(400).json({ error: "No image chosen" })
+    try {
+      const { public_id } = req.body;
+      if (!public_id) return res.status(400).json({ error: "No image chosen" })
+      cloudinary.v2.uploader.destroy(
+        public_id, 
+        async(err, result) => {
+          if(err) throw err;
+          res.json({ msg: "Image deleted" });
+        }
+      );
+    } 
+    catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
-
 );
 
 module.exports = router;
