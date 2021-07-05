@@ -24,7 +24,7 @@ router.post(
     //try {
       //const { public_id } = req.body;
       //if (!public_id) return res.status(400).json({ error: "No image chosen" })
-      const public_id = g0nmildklkor3gjljnws;
+      const public_id = "g0nmildklkor3gjljnws";
       uploader.destroy(
         public_id, 
         /*async(err, result) => {
