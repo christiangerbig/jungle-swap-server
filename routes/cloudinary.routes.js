@@ -25,7 +25,7 @@ router.post(
       //const { public_id } = req.body;
       //if (!public_id) return res.status(400).json({ error: "No image chosen" })
       const public_id = g0nmildklkor3gjljnws;
-      cloudinary.uploader.destroy(
+      uploader.destroy(
         public_id, 
         /*async(err, result) => {
           if(err) throw err;
