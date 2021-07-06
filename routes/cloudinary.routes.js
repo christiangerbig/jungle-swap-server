@@ -26,11 +26,7 @@ router.post(
       if (!public_id) return res.status(400).json({error: "No image chosen"});
       uploader.destroy(
         public_id,
-        type = "authenticated", 
-        async(err, result) => {
-          if(err) throw err;
-          res.json({msg: "Image deleted"});
-        }
+        type = "authenticated" 
       );
     } 
     catch (err) {
