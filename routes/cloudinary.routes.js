@@ -22,7 +22,7 @@ router.post(
   "/destroy",
   (req, res) => {
       uploader.destroy(
-        "g0nmildklkor3gjljnws",
+        {public_id: "g0nmildklkor3gjljnws"},
         {type : "authenticated"} 
       );
     } 
