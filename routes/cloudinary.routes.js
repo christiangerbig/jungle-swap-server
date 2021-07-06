@@ -24,7 +24,7 @@ router.post(
       console.log(uploader);
       uploader.destroy(
         "g0nmildklkor3gjljnws",
-        type = "authenticated" 
+        {type : "authenticated"} 
       );
     } 
   
