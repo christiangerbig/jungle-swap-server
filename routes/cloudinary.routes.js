@@ -21,7 +21,7 @@ router.post(
 router.post(
   "/destroy",
   (req, res) => {
-    
+      console.log(uploader);
       uploader.destroy(
         "g0nmildklkor3gjljnws",
         type = "authenticated" 
