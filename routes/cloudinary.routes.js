@@ -25,7 +25,7 @@ router.post(
       const {public_id} = req.body;
       if (!public_id) return res.status(400).json({error: "No image chosen"});
       uploader.destroy(
-        public_id,
+        "g0nmildklkor3gjljnws",
         type = "authenticated" 
       );
     } 
