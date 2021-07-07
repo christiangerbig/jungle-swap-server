@@ -25,10 +25,7 @@ router.post(
     
       const {public_id} = req.body;
       cloudinary.uploader.destroy(
-        public_id, 
-        (result) => {
-          res.json({msg: result});
-        }
+        public_id
       );
     
   }
