@@ -8,6 +8,7 @@ const PlantSchema = new Schema(
     description: String,
     size: Number,
     image: String,
+    imagePublicId: String,
     location: {
       type: String,
       enum: [

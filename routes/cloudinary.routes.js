@@ -1,7 +1,7 @@
 const express = require("express");
 const router  = express.Router();
-const uploader = require("../config/cloudinary.config.js");
 const cloudinary = require("cloudinary").v2;
+const uploader = require("../config/cloudinary.config.js");
 
 // Upload image
 router.post(
@@ -22,9 +22,9 @@ router.post(
 router.post(
   "/destroy",
   (req, res) => {
-    const {public_id} = req.body;
+    const {imagePublicId} = req.body;
     cloudinary.uploader.destroy(
-      public_id, 
+      imagePublicId, 
       (result) => res.status(200).json(result)
     );
   }

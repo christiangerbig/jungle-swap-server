@@ -55,7 +55,7 @@ router.post(
   "/plants/create",
   (req, res) => {
     const creator = req.session.loggedInUser._id;
-    const {name, description, size, image, location, price} = req.body;
+    const {name, description, size, image, imagePublicId, location, price} = req.body;
     // Server side validation
     if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({error: "Please enter name, description, size, location and price"});
     const newPlant = {
@@ -63,6 +63,7 @@ router.post(
       description,
       size,
       image,
+      imagePublicId,
       location,
       price,
       creator
@@ -108,12 +109,13 @@ router.patch(
   "/plants/update/:plantId",
   (req, res) => {
     const plantId = req.params.plantId;
-    const {name, description, size, location, image, price} = req.body;
+    const {name, description, size, location, image, imagePublicId, price} = req.body;
     const updatedPlant = {
       name,
       description,
       size,
       image,
+      imagePublicId,
       location,
       price
     };
