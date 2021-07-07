@@ -22,13 +22,11 @@ router.post(
 router.post(
   "/destroy",
   (req, res) => {
-    
-      const {public_id} = req.body;
-      cloudinary.uploader.destroy(
-        public_id, 
-        (result) => res.status(200).json(result)
-      );
-    
+    const {public_id} = req.body;
+    cloudinary.uploader.destroy(
+      public_id, 
+      (result) => res.status(200).json(result)
+    );
   }
 );
 
