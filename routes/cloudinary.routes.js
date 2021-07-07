@@ -1,6 +1,7 @@
 const express = require("express");
 const router  = express.Router();
 const uploader = require("../config/cloudinary.config.js");
+const cloudinary = require("cloudinary").v2;
 
 // Upload image
 router.post(
@@ -24,11 +25,10 @@ router.post(
     try {
       const {public_id} = req.body;
       if (!public_id) return res.status(400).json({error: "No image chosen"});
-      uploader.destroy(
+      cloudinary.uploader.destroy(
         public_id, 
-        async(err, result) => {
-          if(err) throw err;
-          res.json({msg: "Image deleted"});
+        (result) => {
+          res.json({msg: result});
         }
       );
     } 
