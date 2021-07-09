@@ -13,7 +13,7 @@ cloudinary.config(
 const storage = new CloudinaryStorage(
   {
     cloudinary,
-    folder: "bananarama", // Name of the folder in cloudinary
+    folder: "plants", // Name of the folder in cloudinary
     allowedFormats: [
       "jpg", "png"
     ],
@@ -22,4 +22,4 @@ const storage = new CloudinaryStorage(
   }
 );
 
-module.exports = multer({ storage });
+module.exports = multer({storage});

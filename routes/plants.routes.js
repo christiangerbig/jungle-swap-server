@@ -56,7 +56,6 @@ router.post(
   (req, res) => {
     const creator = req.session.loggedInUser._id;
     const {name, description, size, image, imagePublicId, location, price} = req.body;
-    // Server side validation
     if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({error: "Please enter name, description, size, location and price"});
     const newPlant = {
       name,
@@ -87,8 +86,7 @@ router.post(
 router.get(
   "/plants/read/:plantId",
   (req, res) => {
-    const plantId = req.params.plantId;
-    PlantModel.findById(plantId)
+    PlantModel.findById(req.params.plantId)
       .populate("creator")
       .then(
         (response) => res.status(200).json(response)
@@ -108,7 +106,6 @@ router.get(
 router.patch(
   "/plants/update/:plantId",
   (req, res) => {
-    const plantId = req.params.plantId;
     const {name, description, size, location, image, imagePublicId, price} = req.body;
     const updatedPlant = {
       name,
@@ -120,7 +117,7 @@ router.patch(
       price
     };
     PlantModel.findByIdAndUpdate(
-      plantId, 
+      req.params.plantId, 
       {$set: updatedPlant}, 
       {new: true}
     )
@@ -142,8 +139,7 @@ router.patch(
 router.delete(
   "/plants/delete/:plantId",
   (req, res) => {
-    const plantId = req.params.plantId;
-    PlantModel.findByIdAndDelete(plantId)
+    PlantModel.findByIdAndDelete(req.params.plantId)
       .then(
         (response) => res.status(200).json(response)
       )

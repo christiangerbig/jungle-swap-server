@@ -8,7 +8,6 @@ router.post(
   "/signup",
   (req, res) => {
     const {username, email, password} = req.body;
-    // Server side validation
     if (!username || !email || !password) return res.status(500).json({error: "Please enter username, email and password"});
     // Email validation
      const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
@@ -16,7 +15,7 @@ router.post(
     // Password validation
      const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
      if (!passwordRegExp.test(password)) return res.status(500).json({error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"});
-    // Creating a salt 
+    // Creating salt 
     const salt = bcrypt.genSaltSync(10);
     const passwordHash = bcrypt.hashSync(password, salt);
     UserModel.create(
@@ -61,12 +60,11 @@ router.post(
   "/signin",
   (req, res) => {
     const {email, password} = req.body;
-    // Server side validation
     if (!email || !password) return res.status(500).json({ error: "Please enter email and password" });
     // Valid email
     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
     if (!emailRegExp.test(email)) return res.status(500).json({ error: "Email format not correct" });
-    // Look up if the user exists in the database
+    // Look up if user exists in the database
     UserModel.findOne({email})
       .then(
         (userData) => {
@@ -74,7 +72,7 @@ router.post(
           bcrypt.compare(password, userData.passwordHash)
             .then(
               (doesItMatch) => {
-                // If it matches
+                // If password matches
                 if (doesItMatch) {
                   userData.passwordHash = "***";
                   req.session.loggedInUser = userData;
@@ -93,7 +91,6 @@ router.post(
             );
         }
       )
-      // Throw an error if the user does not exists 
       .catch(
         (err) => {
           return res.status(500).json(
@@ -119,7 +116,7 @@ router.post(
 // Middleware to check if user is loggedIn
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
-    next()
+    next();
   }
   else {
     res.status(401).json(
@@ -135,9 +132,7 @@ const isLoggedIn = (req, res, next) => {
 router.get(
   "/user",
   isLoggedIn,
-  (req, res) => {
-    res.status(200).json(req.session.loggedInUser);
-  }
+  (req, res) => res.status(200).json(req.session.loggedInUser)
 );
 
 module.exports = router;

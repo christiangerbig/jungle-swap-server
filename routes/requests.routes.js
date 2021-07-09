@@ -59,8 +59,7 @@ router.post(
 router.get(
   "/requests/read/:requestId",
   (req, res) => {
-    const requestId = req.params.requestId; 
-    RequestModel.findById(requestId)
+    RequestModel.findById(req.params.requestId)
       .populate("buyer")
       .populate("seller")
       .populate("plant")
@@ -82,7 +81,6 @@ router.get(
 router.patch(
   "/requests/update/:requestId",
   (req, res) => {
-    const requestId = req.params.requestId; 
     const {buyer, seller, plant, message, reply} = req.body;
     const updatedRequest = {
       buyer,
@@ -92,7 +90,7 @@ router.patch(
       reply
     };
     RequestModel.findByIdAndUpdate(
-      requestId, 
+      req.params.requestId, 
       {$set: updatedRequest}, 
       {new: true}
     )
@@ -114,8 +112,7 @@ router.patch(
 router.delete(
   "/requests/delete/:requestId",
   (req, res) => {
-    const requestId = req.params.requestId; 
-    RequestModel.findByIdAndDelete(requestId)
+    RequestModel.findByIdAndDelete(req.params.requestId)
       .then(
         (response) => res.status(200).json(response)
       )
