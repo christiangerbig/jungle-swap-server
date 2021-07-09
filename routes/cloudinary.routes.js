@@ -1,9 +1,8 @@
 const express = require("express");
 const router  = express.Router();
 const cloudinary = require("cloudinary").v2;
-//const uploader = require("../config/cloudinary.config.js");
-
-const uploader = multer({storage});
+const multer  = require('multer')
+const uploader = multer({ dest: 'uploads/' })
 
 // Upload image
 router.post(
