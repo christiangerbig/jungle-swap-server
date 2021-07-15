@@ -2,9 +2,7 @@ const router = require("express").Router();
 const stripe = require("stripe")("sk_test_51IQBsPA6EAM4YnfDx9U5G148b6vEJ1WADAczlAfKeu3xwWctEifxXJZ1oZDQZg6IoGZ0ByG5dPECpKDXNJ8pZtMG00DJjMEVbK");
 
 // Calculate price
-const calculateOrderAmount = (price) => {
-  return price * 100; // Comma correction
-}
+const calculateOrderAmount = price => price * 100 // Comma correction
 
 // Create payment intent with order amount and currency
 router.post(

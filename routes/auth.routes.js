@@ -27,8 +27,7 @@ router.post(
     )
       .then(
         (user) => {
-          // Ensuring that hash is not shared as well with user
-          user.passwordHash = "***";
+          user.passwordHash = "***"; // Ensuring that hash is not shared as well with user
           res.status(200).json(user);
         }
       )
@@ -85,21 +84,17 @@ router.post(
               }
             )
             .catch(
-              () => {
-                return res.status(500).json({error: "Email format not correct"});
-              }
+              () => res.status(500).json({error: "Email format not correct"})
             );
         }
       )
       .catch(
-        (err) => {
-          return res.status(500).json(
+        (err) => res.status(500).json(
             {
-              error: "Email does not exist",
+              error: "User does not exist",
               message: err
             }
-          );
-        }
+          )
       );
   }
 );
