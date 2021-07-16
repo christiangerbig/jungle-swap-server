@@ -60,7 +60,7 @@ router.post(
   (req, res) => {
     const {email, password} = req.body;
     if (!email || !password) return res.status(500).json({ error: "Please enter email and password" });
-    // Valid email
+    // Email validation
     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
     if (!emailRegExp.test(email)) return res.status(500).json({ error: "Email format not correct" });
     // Look up if user exists in the database
