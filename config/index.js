@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // Middleware configuration
-module.exports = (app) => {
+module.exports = app => {
   
   // Requests from outside
   app.set("trust proxy", 1);

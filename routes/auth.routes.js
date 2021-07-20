@@ -26,13 +26,13 @@ router.post(
       }
     )
       .then(
-        (user) => {
+        user => {
           user.passwordHash = "***"; // Ensuring that hash is not shared as well with user
           res.status(200).json(user);
         }
       )
       .catch(
-        (err) => {
+        err => {
           if (err.code === 11000) {
             res.status(500).json(
               { 
@@ -66,11 +66,11 @@ router.post(
     // Look up if user exists in the database
     UserModel.findOne({email})
       .then(
-        (userData) => {
+        userData => {
           // Check if passwords match
           bcrypt.compare(password, userData.passwordHash)
             .then(
-              (doesItMatch) => {
+              doesItMatch => {
                 // If password matches
                 if (doesItMatch) {
                   userData.passwordHash = "***";
@@ -89,7 +89,7 @@ router.post(
         }
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
             {
               error: "User does not exist",
               message: err

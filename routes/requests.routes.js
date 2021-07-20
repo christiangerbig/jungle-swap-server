@@ -11,10 +11,10 @@ router.get(
       .populate("seller")
       .populate("plant")
       .then(
-        (requests) => res.status(200).json(requests)
+        requests => res.status(200).json(requests)
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
           {
             error: "Get requests failed",
             message: err
@@ -42,10 +42,10 @@ router.post(
     }
     RequestModel.create(newRequest)
       .then(
-        (response) => res.status(200).json(response)
+        response => res.status(200).json(response)
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
           {
             error: "Create request failed",
             message: err
@@ -64,10 +64,10 @@ router.get(
       .populate("seller")
       .populate("plant")
       .then(
-        (response) => res.status(200).json(response)
+        response => res.status(200).json(response)
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
           {
             error: "Read request failed",
             message: err
@@ -95,10 +95,10 @@ router.patch(
       {new: true}
     )
       .then(
-        (response) => res.status(200).json(response)
+        response => res.status(200).json(response)
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
           {
             error: "Update request failed",
             message: err
@@ -114,10 +114,10 @@ router.delete(
   (req, res) => {
     RequestModel.findByIdAndDelete(req.params.requestId)
       .then(
-        (response) => res.status(200).json(response)
+        response => res.status(200).json(response)
       )
       .catch(
-        (err) => res.status(500).json(
+        err => res.status(500).json(
           {
             error: "Delete request failed",
             message: err

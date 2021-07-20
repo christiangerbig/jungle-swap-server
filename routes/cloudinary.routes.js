@@ -25,7 +25,7 @@ router.post(
     const {imagePublicId} = req.body;
     cloudinary.uploader.destroy(
       imagePublicId, 
-      (result) => res.status(200).json(result)
+      result => res.status(200).json(result)
     );
   }
 );
