@@ -31,7 +31,6 @@ router.post(
     const buyer = req.session.loggedInUser._id;
     const {message, seller, plant} = req.body;
     const reply = "";
-    // Server side validation
     if (!message) return res.status(500).json({error: "Please enter message text"});
     const newRequest = {
       buyer,
