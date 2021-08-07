@@ -7,14 +7,14 @@ const UserModel = require("../models/User.model");
 router.post(
   "/signup",
   (req, res) => {
-    const {username, email, password} = req.body;
-    if (!username || !email || !password) return res.status(500).json({error: "Please enter username, email and password"});
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) return res.status(500).json({ error: "Please enter username, email and password" });
     // Email validation
-     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
-     if (!emailRegExp.test(email)) return res.status(500).json({error: "Email format not correct"});
+    const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
+    if (!emailRegExp.test(email)) return res.status(500).json({ error: "Email format not correct" });
     // Password validation
-     const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
-     if (!passwordRegExp.test(password)) return res.status(500).json({error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet"});
+    const passwordRegExp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+    if (!passwordRegExp.test(password)) return res.status(500).json({ error: "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet" });
     // Creating salt 
     const salt = bcrypt.genSaltSync(10);
     const passwordHash = bcrypt.hashSync(password, salt);
@@ -35,7 +35,7 @@ router.post(
         err => {
           if (err.code === 11000) {
             res.status(500).json(
-              { 
+              {
                 error: "Username or email entered already exists!",
                 message: err
               }
@@ -58,13 +58,13 @@ router.post(
 router.post(
   "/signin",
   (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     if (!email || !password) return res.status(500).json({ error: "Please enter email and password" });
     // Email validation
     const emailRegExp = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
     if (!emailRegExp.test(email)) return res.status(500).json({ error: "Email format not correct" });
     // Look up if user exists in the database
-    UserModel.findOne({email})
+    UserModel.findOne({ email })
       .then(
         userData => {
           // Check if passwords match
@@ -79,22 +79,22 @@ router.post(
                 }
                 // If passwords do not match
                 else {
-                  return res.status(500).json({error: "Passwords don\"t match"});
+                  return res.status(500).json({ error: "Passwords don\"t match" });
                 }
               }
             )
             .catch(
-              () => res.status(500).json({error: "Email format not correct"})
+              () => res.status(500).json({ error: "Email format not correct" })
             );
         }
       )
       .catch(
         err => res.status(500).json(
-            {
-              error: "User does not exist",
-              message: err
-            }
-          )
+          {
+            error: "User does not exist",
+            message: err
+          }
+        )
       );
   }
 );

@@ -29,9 +29,9 @@ router.post(
   "/requests/create",
   (req, res) => {
     const buyer = req.session.loggedInUser._id;
-    const {message, seller, plant} = req.body;
+    const { message, seller, plant } = req.body;
     const reply = "";
-    if (!message) return res.status(500).json({error: "Please enter message text"});
+    if (!message) return res.status(500).json({ error: "Please enter message text" });
     const newRequest = {
       buyer,
       seller,
@@ -80,7 +80,7 @@ router.get(
 router.patch(
   "/requests/update/:requestId",
   (req, res) => {
-    const {buyer, seller, plant, message, reply} = req.body;
+    const { buyer, seller, plant, message, reply } = req.body;
     const updatedRequest = {
       buyer,
       seller,
@@ -89,9 +89,9 @@ router.patch(
       reply
     };
     RequestModel.findByIdAndUpdate(
-      req.params.requestId, 
-      {$set: updatedRequest}, 
-      {new: true}
+      req.params.requestId,
+      { $set: updatedRequest },
+      { new: true }
     )
       .then(
         response => res.status(200).json(response)

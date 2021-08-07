@@ -6,15 +6,15 @@ require("./Plant.model");
 const RequestSchema = new Schema(
   {
     buyer: {
-      type: Schema.Types.ObjectId, 
+      type: Schema.Types.ObjectId,
       ref: "user"
     },
     seller: {
-      type: Schema.Types.ObjectId, 
+      type: Schema.Types.ObjectId,
       ref: "user"
     },
     plant: {
-      type: Schema.Types.ObjectId, 
+      type: Schema.Types.ObjectId,
       ref: "plant"
     },
     message: String,

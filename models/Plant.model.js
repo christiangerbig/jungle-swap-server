@@ -12,8 +12,8 @@ const PlantSchema = new Schema(
     location: {
       type: String,
       enum: [
-        "Select location", 
-        "sun", "shade", 
+        "Select location",
+        "sun", "shade",
         "sun and shade"
       ]
     },

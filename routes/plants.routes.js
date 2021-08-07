@@ -55,8 +55,8 @@ router.post(
   "/plants/create",
   (req, res) => {
     const creator = req.session.loggedInUser._id;
-    const {name, description, size, image, imagePublicId, location, price} = req.body;
-    if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({error: "Please enter name, description, size, location and price"});
+    const { name, description, size, image, imagePublicId, location, price } = req.body;
+    if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({ error: "Please enter name, description, size, location and price" });
     const newPlant = {
       name,
       description,
@@ -106,7 +106,7 @@ router.get(
 router.patch(
   "/plants/update/:plantId",
   (req, res) => {
-    const {name, description, size, location, image, imagePublicId, price} = req.body;
+    const { name, description, size, location, image, imagePublicId, price } = req.body;
     const updatedPlant = {
       name,
       description,
@@ -117,9 +117,9 @@ router.patch(
       price
     };
     PlantModel.findByIdAndUpdate(
-      req.params.plantId, 
-      {$set: updatedPlant}, 
-      {new: true}
+      req.params.plantId,
+      { $set: updatedPlant },
+      { new: true }
     )
       .then(
         response => res.status(200).json(response)
