@@ -7,7 +7,7 @@ const PlantSchema = new Schema(
     name: String,
     description: String,
     size: Number,
-    image: String,
+    imageUrl: String,
     imagePublicId: String,
     location: {
       type: String,

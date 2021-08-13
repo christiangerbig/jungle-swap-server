@@ -55,13 +55,13 @@ router.post(
   "/plants/create",
   (req, res) => {
     const creator = req.session.loggedInUser._id;
-    const { name, description, size, image, imagePublicId, location, price } = req.body;
+    const { name, description, size, imageUrl, imagePublicId, location, price } = req.body;
     if (!name || !description || !size || (location === "Select location") || !price) return res.status(500).json({ error: "Please enter name, description, size, location and price" });
     const newPlant = {
       name,
       description,
       size,
-      image,
+      imageUrl,
       imagePublicId,
       location,
       price,
@@ -106,12 +106,12 @@ router.get(
 router.patch(
   "/plants/update/:plantId",
   (req, res) => {
-    const { name, description, size, location, image, imagePublicId, price } = req.body;
+    const { name, description, size, location, imageUrl, imagePublicId, price } = req.body;
     const updatedPlant = {
       name,
       description,
       size,
-      image,
+      imageUrl,
       imagePublicId,
       location,
       price
