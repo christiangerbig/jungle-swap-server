@@ -8,7 +8,7 @@ router.get("/requests/fetch", (req, res) => {
     .populate("buyer")
     .populate("seller")
     .populate("plant")
-    .then((requests) => res.status(200).json(requests))
+    .then((response) => res.status(200).json(response))
     .catch((err) =>
       res.status(500).json({
         error: "Get requests failed",

@@ -6,7 +6,7 @@ const PlantModel = require("../models/Plant.model");
 router.get("/plants/fetch", (req, res) => {
   PlantModel.find()
     .populate("creator")
-    .then((plants) => res.status(200).json(plants))
+    .then((response) => res.status(200).json(response))
     .catch((err) =>
       res.status(500).json({
         error: "Find all plants failed",
@@ -25,7 +25,7 @@ router.get("/plants/search", (req, res) => {
     },
   })
     .populate("creator")
-    .then((plants) => res.status(200).json(plants))
+    .then((response) => res.status(200).json(response))
     .catch((err) =>
       res.status(500).json({
         error: "Search plant failed",
