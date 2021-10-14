@@ -66,7 +66,7 @@ router.patch("/requests/update/:requestId", (req, res) => {
     plant,
     message,
     reply,
-    requestState: false,
+    requestState,
   };
   RequestModel.findByIdAndUpdate(
     req.params.requestId,
