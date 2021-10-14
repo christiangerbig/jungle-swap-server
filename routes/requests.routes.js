@@ -30,6 +30,7 @@ router.post("/requests/create", (req, res) => {
     plant,
     message,
     reply,
+    requestState: true,
   };
   RequestModel.create(newRequest)
     .then((response) => res.status(200).json(response))
@@ -58,13 +59,14 @@ router.get("/requests/read/:requestId", (req, res) => {
 
 // PATCH Update request
 router.patch("/requests/update/:requestId", (req, res) => {
-  const { buyer, seller, plant, message, reply } = req.body;
+  const { buyer, seller, plant, message, reply, requestState } = req.body;
   const updatedRequest = {
     buyer,
     seller,
     plant,
     message,
     reply,
+    requestState: false,
   };
   RequestModel.findByIdAndUpdate(
     req.params.requestId,

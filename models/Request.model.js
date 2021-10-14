@@ -18,6 +18,7 @@ const RequestSchema = new Schema({
   },
   message: String,
   reply: String,
+  requestState: Boolean,
 });
 
 const RequestModel = model("request", RequestSchema);
