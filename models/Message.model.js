@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 require("./User.model");
 require("./Plant.model");
 
-const RequestSchema = new Schema({
+const MessageSchema = new Schema({
   buyer: {
     type: Schema.Types.ObjectId,
     ref: "user",
@@ -16,11 +16,11 @@ const RequestSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "plant",
   },
-  message: String,
+  request: String,
   reply: String,
-  requestState: Boolean,
+  messageState: Boolean,
 });
 
-const RequestModel = model("request", RequestSchema);
+const MessageModel = model("request", MessageSchema);
 
-module.exports = RequestModel;
+module.exports = MessageModel;
