@@ -21,12 +21,10 @@ router.post("/signup", (req, res) => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
   );
   if (!passwordRegExp.test(password))
-    return res
-      .status(500)
-      .json({
-        error:
-          "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet",
-      });
+    return res.status(500).json({
+      error:
+        "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet",
+    });
   // Creating salt
   const salt = bcrypt.genSaltSync(10);
   const passwordHash = bcrypt.hashSync(password, salt);
@@ -97,6 +95,16 @@ router.post("/signin", (req, res) => {
 
 // POST Logout
 router.post("/logout", (req, res) => {
+  const { username, email, password } = req.body;
+  const updatedUser = { username, email, password };
+  UserModel.findOneAndUpdate({ email }, { $set: updatedUser }, { new: true })
+    .then((response) => res.status(200).json(response))
+    .catch((err) =>
+      res.status(500).json({
+        error: "Could not update user",
+        message: err,
+      })
+    );
   req.session.destroy();
   res.status(204).json({}); // Nothing to send back to the user
 });
