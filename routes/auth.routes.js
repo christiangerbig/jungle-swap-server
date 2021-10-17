@@ -97,8 +97,8 @@ router.post("/signin", (req, res) => {
 
 // POST Logout
 router.post("/logout", (req, res) => {
-  const { username, email, password } = req.body;
-  const updatedUser = { username, email, password };
+  const { username, email, password, amountOfRequests, amountOfReplies } = req.body;
+  const updatedUser = { username, email, password, amountOfRequests, amountOfReplies  };
   UserModel.findOneAndUpdate({ email }, { $set: updatedUser }, { new: true })
     .then((response) => res.status(200).json(response))
     .catch((err) =>
