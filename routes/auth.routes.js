@@ -32,6 +32,8 @@ router.post("/signup", (req, res) => {
     username,
     email,
     passwordHash,
+    amountOfRequests: 0,
+    amountOfReplies: 0,
   })
     .then((user) => {
       user.passwordHash = "***"; // Ensuring that hash is not shared as well with user
