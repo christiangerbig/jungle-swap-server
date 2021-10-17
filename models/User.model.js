@@ -13,6 +13,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  amountOfRequests: Number,
+  amountOfReplies: Number,
 });
 
 const UserModel = model("user", UserSchema);
