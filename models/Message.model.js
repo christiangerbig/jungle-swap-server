@@ -21,6 +21,6 @@ const MessageSchema = new Schema({
   messageState: Boolean,
 });
 
-const MessageModel = model("request", MessageSchema);
+const MessageModel = model("message", MessageSchema);
 
 module.exports = MessageModel;
