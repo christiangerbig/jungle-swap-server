@@ -47,10 +47,10 @@ app.use("/api", cloudinaryRoutes);
 const stripeRoutes = require("./routes/stripe.routes");
 app.use("/api", stripeRoutes);
 
-app.use(
-  (req, res) => res.sendFile(__dirname + "/public/index.html") // If no routes match, send React HTML.
-);
+app.use((req, res) => {
+  res.sendFile(__dirname + "/public/index.html"); // If no routes match, send React HTML.
+});
 
-require("./error-handling")(app); // Error handling
+require("./error-handling")(app);
 
 module.exports = app;

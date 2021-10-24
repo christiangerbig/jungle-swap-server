@@ -6,25 +6,31 @@ const UserModel = require("../models/User.model");
 // POST Signup
 router.post("/signup", (req, res) => {
   const { username, email, password } = req.body;
-  if (!username || !email || !password)
-    return res
+  if (!username || !email || !password) {
+    res
       .status(500)
       .json({ error: "Please enter username, email and password" });
+    return;
+  }
   // Email validation
   const emailRegExp = new RegExp(
     /^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/
   );
-  if (!emailRegExp.test(email))
-    return res.status(500).json({ error: "Email format not correct" });
+  if (!emailRegExp.test(email)) {
+    res.status(500).json({ error: "Email format not correct" });
+    return;
+  }
   // Password validation
   const passwordRegExp = new RegExp(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
   );
-  if (!passwordRegExp.test(password))
-    return res.status(500).json({
+  if (!passwordRegExp.test(password)) {
+    res.status(500).json({
       error:
         "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet",
     });
+    return;
+  }
   // Creating salt
   const salt = bcrypt.genSaltSync(10);
   const passwordHash = bcrypt.hashSync(password, salt);
@@ -57,14 +63,18 @@ router.post("/signup", (req, res) => {
 // POST Signin
 router.post("/signin", (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password)
-    return res.status(500).json({ error: "Please enter email and password" });
+  if (!email || !password) {
+    res.status(500).json({ error: "Please enter email and password" });
+    return;
+  }
   // Email validation
   const emailRegExp = new RegExp(
     /^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/
   );
-  if (!emailRegExp.test(email))
-    return res.status(500).json({ error: "Email format not correct" });
+  if (!emailRegExp.test(email)) {
+    res.status(500).json({ error: "Email format not correct" });
+    return;
+  }
   // Look up if user exists in the database
   UserModel.findOne({ email })
     .then((userData) => {
@@ -80,33 +90,47 @@ router.post("/signin", (req, res) => {
           }
           // If passwords do not match
           else {
-            return res.status(500).json({ error: 'Passwords don"t match' });
+            res.status(500).json({ error: 'Passwords don"t match' });
+            return;
           }
         })
-        .catch(() =>
-          res.status(500).json({ error: "Email format not correct" })
-        );
+        .catch(() => {
+          res.status(500).json({ error: "Email format not correct" });
+          return;
+        });
     })
-    .catch((err) =>
+    .catch((err) => {
       res.status(500).json({
         error: "User does not exist",
         message: err,
-      })
-    );
+      });
+      return;
+    });
 });
 
 // POST Logout
 router.post("/logout", (req, res) => {
-  const { username, email, password, amountOfRequests, amountOfReplies } = req.body;
-  const updatedUser = { username, email, password, amountOfRequests, amountOfReplies  };
+  const { username, email, password, amountOfRequests, amountOfReplies } =
+    req.body;
+  const updatedUser = {
+    username,
+    email,
+    password,
+    amountOfRequests,
+    amountOfReplies,
+  };
   UserModel.findOneAndUpdate({ email }, { $set: updatedUser }, { new: true })
-    .then((response) => res.status(200).json(response))
-    .catch((err) =>
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
       res.status(500).json({
         error: "Could not update user",
         message: err,
-      })
-    );
+      });
+      req.session.destroy();
+      return;
+    });
   req.session.destroy();
   res.status(204).json({}); // Nothing to send back to the user
 });
@@ -124,8 +148,8 @@ const isLoggedIn = (req, res, next) => {
 };
 
 // GET protected route
-router.get("/user", isLoggedIn, (req, res) =>
-  res.status(200).json(req.session.loggedInUser)
-);
+router.get("/user", isLoggedIn, (req, res) => {
+  res.status(200).json(req.session.loggedInUser);
+});
 
 module.exports = router;
