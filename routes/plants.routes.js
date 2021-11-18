@@ -11,7 +11,7 @@ router.get("/plants/fetch", (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: "Find all plants failed",
+        error: "Fetch all plants failed",
         message: err,
       });
     });
