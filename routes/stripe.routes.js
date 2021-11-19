@@ -7,7 +7,7 @@ const stripe = require("stripe")(
 const calculateOrderAmount = (price) => price * 100; // Comma correction
 
 // Create payment intent with order amount and currency
-router.post("/create-payment-intent", async (req, res) => {
+router.post("/stripe/create-payment-intent", async (req, res) => {
   const { price } = req.body;
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(price),

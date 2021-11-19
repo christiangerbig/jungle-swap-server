@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const uploader = require("../config/cloudinary.config.js");
 
 // Upload image
-router.post("/upload", uploader.single("image"), (req, res) => {
+router.post("/cloudinary/upload", uploader.single("image"), (req, res) => {
   if (!req.file) {
     res.status(500).json({ error: "Please choose an image" });
     return;
@@ -16,7 +16,7 @@ router.post("/upload", uploader.single("image"), (req, res) => {
 });
 
 // Delete image
-router.post("/destroy", (req, res) => {
+router.post("/cloudinary/destroy", (req, res) => {
   const { imagePublicId } = req.body;
   cloudinary.uploader.destroy(imagePublicId, (result) => {
     res.status(200).json(result);

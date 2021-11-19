@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const UserModel = require("../models/User.model");
 
 // POST Signup
-router.post("/user/signup", (req, res) => {
+router.post("/auth/signup", (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
     res
@@ -61,7 +61,7 @@ router.post("/user/signup", (req, res) => {
 });
 
 // POST Signin
-router.post("/user/signin", (req, res) => {
+router.post("/auth/signin", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(500).json({ error: "Please enter email and password" });
@@ -109,7 +109,7 @@ router.post("/user/signin", (req, res) => {
 });
 
 // POST Logout
-router.post("/user/logout", (req, res) => {
+router.post("/auth/logout", (req, res) => {
   const { username, email, password, amountOfRequests, amountOfReplies } =
     req.body;
   const updatedUser = {
@@ -148,7 +148,7 @@ const checkUserLoggedIn = (req, res, next) => {
 };
 
 // GET protected route
-router.get("/user/check", checkUserLoggedIn, (req, res) => {
+router.get("/auth/checkuser", checkUserLoggedIn, (req, res) => {
   res.status(200).json(req.session.loggedInUser);
 });
 
