@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const UserModel = require("../models/User.model");
 
 // POST Signup
-router.post("/signup", (req, res) => {
+router.post("/user/signup", (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
     res
@@ -61,7 +61,7 @@ router.post("/signup", (req, res) => {
 });
 
 // POST Signin
-router.post("/signin", (req, res) => {
+router.post("/user/signin", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(500).json({ error: "Please enter email and password" });
@@ -109,7 +109,7 @@ router.post("/signin", (req, res) => {
 });
 
 // POST Logout
-router.post("/logout", (req, res) => {
+router.post("/user/logout", (req, res) => {
   const { username, email, password, amountOfRequests, amountOfReplies } =
     req.body;
   const updatedUser = {
@@ -135,8 +135,8 @@ router.post("/logout", (req, res) => {
   res.status(204).json({}); // Nothing to send back to the user
 });
 
-// Middleware to check if user is loggedIn
-const isLoggedIn = (req, res, next) => {
+// Middleware to check if user is logged in
+const checkUserLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
     next();
   } else {
@@ -148,7 +148,7 @@ const isLoggedIn = (req, res, next) => {
 };
 
 // GET protected route
-router.get("/user", isLoggedIn, (req, res) => {
+router.get("/user/check", checkUserLoggedIn, (req, res) => {
   res.status(200).json(req.session.loggedInUser);
 });
 
