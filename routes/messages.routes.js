@@ -2,23 +2,6 @@ const express = require("express");
 const router = express.Router();
 const MessageModel = require("../models/Message.model");
 
-// GET Fetch all messages
-router.get("/messages/fetch", (req, res) => {
-  MessageModel.find()
-    .populate("buyer")
-    .populate("seller")
-    .populate("plant")
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Get messages failed",
-        message: err,
-      });
-    });
-});
-
 // POST Create message
 router.post("/messages/create", (req, res) => {
   const buyer = req.session.loggedInUser._id;
@@ -48,8 +31,25 @@ router.post("/messages/create", (req, res) => {
     });
 });
 
-// GET Single message
-router.get("/messages/read/:messageId", (req, res) => {
+// GET Fetch all messages
+router.get("/messages/fetch-all", (req, res) => {
+  MessageModel.find()
+    .populate("buyer")
+    .populate("seller")
+    .populate("plant")
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Fetch all messages failed",
+        message: err,
+      });
+    });
+});
+
+// GET Fetch single message
+router.get("/messages/fetch/:messageId", (req, res) => {
   MessageModel.findById(req.params.messageId)
     .populate("buyer")
     .populate("seller")
@@ -59,7 +59,7 @@ router.get("/messages/read/:messageId", (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: "Read message failed",
+        error: "Fetch message failed",
         message: err,
       });
     });

@@ -2,42 +2,6 @@ const express = require("express");
 const router = express.Router();
 const PlantModel = require("../models/Plant.model");
 
-// GET Fetch all plants
-router.get("/plants/fetch", (req, res) => {
-  PlantModel.find()
-    .populate("creator")
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Fetch all plants failed",
-        message: err,
-      });
-    });
-});
-
-// GET Search plant
-router.get("/plants/search", (req, res) => {
-  const name = req.query.q;
-  PlantModel.find({
-    name: {
-      $regex: `^${name}`,
-      $options: "i",
-    },
-  })
-    .populate("creator")
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Search plant failed",
-        message: err,
-      });
-    });
-});
-
 // POST Create plant
 router.post("/plants/create", (req, res) => {
   const creator = req.session.loggedInUser._id;
@@ -77,8 +41,44 @@ router.post("/plants/create", (req, res) => {
     });
 });
 
-// GET Single plant
-router.get("/plants/read/:plantId", (req, res) => {
+// GET Fetch all plants
+router.get("/plants/fetch-all", (req, res) => {
+  PlantModel.find()
+    .populate("creator")
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Fetch all plants failed",
+        message: err,
+      });
+    });
+});
+
+// GET Search plant
+router.get("/plants/search", (req, res) => {
+  const name = req.query.q;
+  PlantModel.find({
+    name: {
+      $regex: `^${name}`,
+      $options: "i",
+    },
+  })
+    .populate("creator")
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Search plant failed",
+        message: err,
+      });
+    });
+});
+
+// GET Fetch single plant
+router.get("/plants/fetch/:plantId", (req, res) => {
   PlantModel.findById(req.params.plantId)
     .populate("creator")
     .then((response) => {
@@ -86,7 +86,7 @@ router.get("/plants/read/:plantId", (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: "Read plant failed",
+        error: "Fetch plant failed",
         message: err,
       });
     });
