@@ -31,16 +31,18 @@ router.post("/auth/sign-up", (req, res) => {
     });
     return;
   }
-  // Creating salt
+  // Creating salt and password
   const salt = bcrypt.genSaltSync(10);
   const passwordHash = bcrypt.hashSync(password, salt);
-  UserModel.create({
+  // Create user
+  const newUser = {
     username,
     email,
     passwordHash,
     amountOfRequests: 0,
     amountOfReplies: 0,
-  })
+  };
+  UserModel.create(newUser)
     .then((user) => {
       user.passwordHash = "***"; // Ensuring that hash is not shared as well with user
       res.status(200).json(user);
@@ -81,15 +83,12 @@ router.post("/auth/sign-in", (req, res) => {
       // Check if passwords match
       bcrypt
         .compare(password, userData.passwordHash)
-        .then((doesItMatch) => {
-          // If password matches
-          if (doesItMatch) {
+        .then((isPasswordMatch) => {
+          if (isPasswordMatch) {
             userData.passwordHash = "***";
             req.session.loggedInUser = userData;
             res.status(200).json(userData);
-          }
-          // If passwords do not match
-          else {
+          } else {
             res.status(500).json({ error: 'Passwords don"t match' });
             return;
           }

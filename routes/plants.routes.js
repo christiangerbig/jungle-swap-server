@@ -79,7 +79,8 @@ router.get("/plants/search", (req, res) => {
 
 // GET Fetch single plant
 router.get("/plants/fetch/:plantId", (req, res) => {
-  PlantModel.findById(req.params.plantId)
+  const { plantId } = req.params;
+  PlantModel.findById(plantId)
     .populate("creator")
     .then((response) => {
       res.status(200).json(response);
@@ -96,6 +97,7 @@ router.get("/plants/fetch/:plantId", (req, res) => {
 router.patch("/plants/update/:plantId", (req, res) => {
   const { name, description, size, location, imageUrl, imagePublicId, price } =
     req.body;
+  const { plantId } = req.params;
   const updatedPlant = {
     name,
     description,
@@ -105,11 +107,7 @@ router.patch("/plants/update/:plantId", (req, res) => {
     location,
     price,
   };
-  PlantModel.findByIdAndUpdate(
-    req.params.plantId,
-    { $set: updatedPlant },
-    { new: true }
-  )
+  PlantModel.findByIdAndUpdate(plantId, { $set: updatedPlant }, { new: true })
     .then((response) => {
       res.status(200).json(response);
     })
@@ -123,7 +121,8 @@ router.patch("/plants/update/:plantId", (req, res) => {
 
 // DELETE plant
 router.delete("/plants/delete/:plantId", (req, res) => {
-  PlantModel.findByIdAndDelete(req.params.plantId)
+  const { plantId } = req.params;
+  PlantModel.findByIdAndDelete(plantId)
     .then((response) => {
       res.status(200).json(response);
     })

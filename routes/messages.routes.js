@@ -50,7 +50,8 @@ router.get("/messages/fetch-all", (req, res) => {
 
 // GET Fetch single message
 router.get("/messages/fetch/:messageId", (req, res) => {
-  MessageModel.findById(req.params.messageId)
+  const { messageId } = req.params;
+  MessageModel.findById(messageId)
     .populate("buyer")
     .populate("seller")
     .populate("plant")
@@ -68,6 +69,7 @@ router.get("/messages/fetch/:messageId", (req, res) => {
 // PATCH Update message
 router.patch("/messages/update/:messageId", (req, res) => {
   const { buyer, seller, plant, request, reply, messageState } = req.body;
+  const { messageId } = req.params;
   const updatedMessage = {
     buyer,
     seller,
@@ -77,7 +79,7 @@ router.patch("/messages/update/:messageId", (req, res) => {
     messageState,
   };
   MessageModel.findByIdAndUpdate(
-    req.params.messageId,
+    messageId,
     { $set: updatedMessage },
     { new: true }
   )
@@ -94,7 +96,8 @@ router.patch("/messages/update/:messageId", (req, res) => {
 
 // DELETE message
 router.delete("/messages/delete/:messageId", (req, res) => {
-  MessageModel.findByIdAndDelete(req.params.messageId)
+  const { messageId } = req.params;
+  MessageModel.findByIdAndDelete(messageId)
     .then((response) => {
       res.status(200).json(response);
     })
