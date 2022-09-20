@@ -11,7 +11,7 @@ router.post("/cloudinary/upload", uploader.single("image"), (req, res) => {
   }
   res.status(200).json({
     imagePublicId: req.file.filename,
-    imageUrl: req.file.path,
+    imageUrl: req.file.path
   });
 });
 

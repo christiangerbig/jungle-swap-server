@@ -43,7 +43,7 @@ router.get("/messages/fetch-all", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch all messages failed",
-        message: err,
+        message: err
       });
     });
 });
@@ -61,7 +61,7 @@ router.get("/messages/fetch/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch message failed",
-        message: err,
+        message: err
       });
     });
 });
@@ -71,9 +71,7 @@ router.patch("/messages/update/:messageId", (req, res) => {
   const { buyer, seller, plant, request, reply, messageState } = req.body;
   const { messageId } = req.params;
   if (!reply) {
-    res.status(500).json({
-      error: "Form: Reply text missing"
-    });
+    res.status(500).json({ error: "Form: Reply text missing" });
     return;
   }
 
@@ -96,7 +94,7 @@ router.patch("/messages/update/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Update message failed",
-        message: err,
+        message: err
       });
     });
 });
@@ -111,7 +109,7 @@ router.delete("/messages/delete/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Delete message failed",
-        message: err,
+        message: err
       });
     });
 });

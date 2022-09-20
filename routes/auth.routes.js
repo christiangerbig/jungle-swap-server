@@ -58,12 +58,12 @@ router.post("/auth/sign-up", (req, res) => {
       if (err.code === 11000) {
         res.status(500).json({
           error: "Form: Username or email already exists",
-          message: err,
+          message: err
         });
       } else {
         res.status(500).json({
           error: "Error while creating user",
-          message: err,
+          message: err
         });
       }
     });
@@ -113,7 +113,7 @@ router.post("/auth/sign-in", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "User does not exist",
-        message: err,
+        message: err
       });
       return;
     });
@@ -128,7 +128,7 @@ router.post("/auth/log-out", (req, res) => {
     email,
     password,
     amountOfRequests,
-    amountOfReplies,
+    amountOfReplies
   };
   UserModel.findOneAndUpdate({ email }, { $set: updatedUser }, { new: true })
     .then((response) => {
@@ -137,7 +137,7 @@ router.post("/auth/log-out", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Could not update user",
-        message: err,
+        message: err
       });
       req.session.destroy();
       return;
@@ -153,7 +153,7 @@ const checkUserLoggedIn = (req, res, next) => {
   } else {
     res.status(401).json({
       message: "Unauthorized user",
-      code: 401,
+      code: 401
     });
   }
 };
