@@ -26,7 +26,7 @@ router.post("/messages/create", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Create message failed",
-        message: err,
+        message: err
       });
     });
 });

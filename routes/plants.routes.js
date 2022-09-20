@@ -8,7 +8,7 @@ router.post("/plants/create", (req, res) => {
   const { name, description, size, imageUrl, imagePublicId, location, price } = req.body;
   // Check if plant parameters are missing
   if (!name) {
-    res.status(500).json({ error: "Form: Name missing" });
+    res.status(300).json({ error: "Form: Name missing" });
     return;
   }
   if (!description) {
