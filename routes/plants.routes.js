@@ -5,37 +5,26 @@ const PlantModel = require("../models/Plant.model");
 // POST Create plant
 router.post("/plants/create", (req, res) => {
   const creator = req.session.loggedInUser._id;
-  const { name, description, size, imageUrl, imagePublicId, location, price } =
-    req.body;
+  const { name, description, size, imageUrl, imagePublicId, location, price } = req.body;
   // Check if plant parameters are missing
   if (!name) {
-    res.status(500).json({
-      error: "Form: Name missing"
-    });
+    res.status(500).json({ error: "Form: Name missing" });
     return;
   }
   if (!description) {
-    res.status(500).json({
-      error: "Form: Description missing"
-    });
+    res.status(500).json({ error: "Form: Description missing" });
     return;
   }
   if (!size) {
-    res.status(500).json({
-      error: "Form: Size missing"
-    });
+    res.status(500).json({ error: "Form: Size missing" });
     return;
   }
   if (location === "Select location") {
-    res.status(500).json({
-      error: "Form: Location missing"
-    });
+    res.status(500).json({ error: "Form: Location missing" });
     return;
   }
   if (!price) {
-    res.status(500).json({
-      error: "Form: Price missing"
-    });
+    res.status(500).json({ error: "Form: Price missing" });
     return;
   }
   // Create new plant object

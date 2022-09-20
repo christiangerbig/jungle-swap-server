@@ -8,21 +8,15 @@ router.post("/auth/sign-up", (req, res) => {
   const { username, email, password } = req.body;
   // Check if parameters are missing
   if (!username) {
-    res
-      .status(500)
-      .json({ error: "Form: Username missing" });
+    res.status(500).json({ error: "Form: Username missing" });
     return;
   }
   if (!email) {
-    res
-      .status(500)
-      .json({ error: "Form: Email missing" });
+    res.status(500).json({ error: "Form: Email missing" });
     return;
   }
   if (!password) {
-    res
-      .status(500)
-      .json({ error: "Form: Password missing" });
+    res.status(500).json({ error: "Form: Password missing" });
     return;
   }
   // Email validation
