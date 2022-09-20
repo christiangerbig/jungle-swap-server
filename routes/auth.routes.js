@@ -6,6 +6,7 @@ const UserModel = require("../models/User.model");
 // POST Sign up
 router.post("/auth/sign-up", (req, res) => {
   const { username, email, password } = req.body;
+  // Check if parameters are missing
   if (!username) {
     res
       .status(500)
@@ -24,13 +25,6 @@ router.post("/auth/sign-up", (req, res) => {
       .json({ error: "Form: Password missing" });
     return;
   }
-
-
-
-
-
-
-
   // Email validation
   const emailRegExp = new RegExp(
     /^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/
@@ -84,8 +78,13 @@ router.post("/auth/sign-up", (req, res) => {
 // POST Sign in
 router.post("/auth/sign-in", (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    res.status(500).json({ error: "Form: Email and password missing" });
+  // Check if parameters are missing
+  if (!email) {
+    res.status(500).json({ error: "Form: Email missing" });
+    return;
+  }
+  if (!password) {
+    res.status(500).json({ error: "Form: Password missing" });
     return;
   }
   // Email validation
