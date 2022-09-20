@@ -70,6 +70,13 @@ router.get("/messages/fetch/:messageId", (req, res) => {
 router.patch("/messages/update/:messageId", (req, res) => {
   const { buyer, seller, plant, request, reply, messageState } = req.body;
   const { messageId } = req.params;
+  if (!reply) {
+    res.status(500).json({
+      error: "Form: Reply text missing"
+    });
+    return;
+  }
+
   const updatedMessage = {
     buyer,
     seller,
