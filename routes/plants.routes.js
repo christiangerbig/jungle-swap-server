@@ -38,6 +38,12 @@ router.post("/plants/create", (req, res) => {
     });
     return;
   }
+  if (!imageUel) {
+    res.status(500).json({
+      error: "Form: Image missing",
+    });
+    return;
+  }
   // Create new plant object
   const newPlant = {
     name,
