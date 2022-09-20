@@ -10,31 +10,31 @@ router.post("/plants/create", (req, res) => {
   // Check if plant parameters are missing
   if (!name) {
     res.status(500).json({
-      error: "Form: Name missing",
+      error: "Form: Name missing"
     });
     return;
   }
   if (!description) {
     res.status(500).json({
-      error: "Form: Description missing",
+      error: "Form: Description missing"
     });
     return;
   }
   if (!size) {
     res.status(500).json({
-      error: "Form: Size missing",
+      error: "Form: Size missing"
     });
     return;
   }
   if (location === "Select location") {
     res.status(500).json({
-      error: "Form: Location missing",
+      error: "Form: Location missing"
     });
     return;
   }
   if (!price) {
     res.status(500).json({
-      error: "Form: Price missing",
+      error: "Form: Price missing"
     });
     return;
   }
