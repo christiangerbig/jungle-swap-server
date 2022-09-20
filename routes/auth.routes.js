@@ -6,18 +6,37 @@ const UserModel = require("../models/User.model");
 // POST Sign up
 router.post("/auth/sign-up", (req, res) => {
   const { username, email, password } = req.body;
-  if (!username || !email || !password) {
+  if (!username) {
     res
       .status(500)
-      .json({ error: "Please enter username, email and password" });
+      .json({ error: "Form: Username missing" });
     return;
   }
+  if (!email) {
+    res
+      .status(500)
+      .json({ error: "Form: Email missing" });
+    return;
+  }
+  if (!password) {
+    res
+      .status(500)
+      .json({ error: "Form: Password missing" });
+    return;
+  }
+
+
+
+
+
+
+
   // Email validation
   const emailRegExp = new RegExp(
     /^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/
   );
   if (!emailRegExp.test(email)) {
-    res.status(500).json({ error: "Email format not correct" });
+    res.status(500).json({ error: "Form: Email format invalid" });
     return;
   }
   // Password validation
@@ -27,7 +46,7 @@ router.post("/auth/sign-up", (req, res) => {
   if (!passwordRegExp.test(password)) {
     res.status(500).json({
       error:
-        "Password needs to have 8 characters, a number, a special character and an Uppercase alphabet",
+        "Form: Password invalid",
     });
     return;
   }
@@ -50,7 +69,7 @@ router.post("/auth/sign-up", (req, res) => {
     .catch((err) => {
       if (err.code === 11000) {
         res.status(500).json({
-          error: "Username or email entered already exists!",
+          error: "Form: Username or email already exists",
           message: err,
         });
       } else {
@@ -66,7 +85,7 @@ router.post("/auth/sign-up", (req, res) => {
 router.post("/auth/sign-in", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    res.status(500).json({ error: "Please enter email and password" });
+    res.status(500).json({ error: "Form: Email and password missing" });
     return;
   }
   // Email validation
@@ -74,7 +93,7 @@ router.post("/auth/sign-in", (req, res) => {
     /^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/
   );
   if (!emailRegExp.test(email)) {
-    res.status(500).json({ error: "Email format not correct" });
+    res.status(500).json({ error: "Form: Email format invalid" });
     return;
   }
   // Look up if user exists in the database
@@ -89,12 +108,12 @@ router.post("/auth/sign-in", (req, res) => {
             req.session.loggedInUser = userData;
             res.status(200).json(userData);
           } else {
-            res.status(500).json({ error: 'Passwords don"t match' });
+            res.status(500).json({ error: "Form: Passwords don't match" });
             return;
           }
         })
         .catch(() => {
-          res.status(500).json({ error: "Email format not correct" });
+          res.status(500).json({ error: "Form: Email format invalid" });
           return;
         });
     })

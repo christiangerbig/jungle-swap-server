@@ -7,18 +7,38 @@ router.post("/plants/create", (req, res) => {
   const creator = req.session.loggedInUser._id;
   const { name, description, size, imageUrl, imagePublicId, location, price } =
     req.body;
-  if (
-    !name ||
-    !description ||
-    !size ||
-    location === "Select location" ||
-    !price
-  ) {
+  // Check if plant parameters are missing
+  if (!name) {
     res.status(500).json({
-      error: "Please enter name, description, size, location and price",
+      error: "Form: Name missing",
     });
     return;
   }
+  if (!description) {
+    res.status(500).json({
+      error: "Form: Description missing",
+    });
+    return;
+  }
+  if (!size) {
+    res.status(500).json({
+      error: "Form: Size missing",
+    });
+    return;
+  }
+  if (location === "Select location") {
+    res.status(500).json({
+      error: "Form: Location missing",
+    });
+    return;
+  }
+  if (!price) {
+    res.status(500).json({
+      error: "Form: Price missing",
+    });
+    return;
+  }
+  // Create new plant object
   const newPlant = {
     name,
     description,

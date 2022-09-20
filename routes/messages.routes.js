@@ -8,7 +8,7 @@ router.post("/messages/create", (req, res) => {
   const { request, seller, plant } = req.body;
   const reply = "";
   if (!request) {
-    res.status(500).json({ error: "Please enter request text" });
+    res.status(500).json({ error: "Form: Request text missing" });
     return;
   }
   const newMessage = {
