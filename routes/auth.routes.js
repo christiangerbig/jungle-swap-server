@@ -152,7 +152,7 @@ const checkUserLoggedIn = (req, res, next) => {
     next();
   } else {
     res.status(401).json({
-      message: "Unauthorized user",
+      error: "Unauthorized user",
       code: 401
     });
   }
