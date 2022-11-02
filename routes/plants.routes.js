@@ -4,10 +4,11 @@ const PlantModel = require("../models/Plant.model");
 
 // POST Create plant
 router.post("/plants/create", (req, res) => {
-  const creator = req.session.loggedInUser._id;
   const {
     body: { name, description, size, imageUrl, imagePublicId, location, price },
+    session: { loggedInUser },
   } = req;
+  const creator = loggedInUser._id;
   // Check if plant parameters are missing
   if (!name) {
     res.status(500).json({ error: "Form: Name missing" });
