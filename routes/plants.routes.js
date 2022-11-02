@@ -5,7 +5,9 @@ const PlantModel = require("../models/Plant.model");
 // POST Create plant
 router.post("/plants/create", (req, res) => {
   const creator = req.session.loggedInUser._id;
-  const { name, description, size, imageUrl, imagePublicId, location, price } = req.body;
+  const {
+    body: { name, description, size, imageUrl, imagePublicId, location, price },
+  } = req;
   // Check if plant parameters are missing
   if (!name) {
     res.status(500).json({ error: "Form: Name missing" });
@@ -36,7 +38,7 @@ router.post("/plants/create", (req, res) => {
     imagePublicId,
     location,
     price,
-    creator
+    creator,
   };
   PlantModel.create(newPlant)
     .then((response) => {
@@ -60,7 +62,7 @@ router.get("/plants/fetch-all", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch all plants failed",
-        message: err
+        message: err,
       });
     });
 });
@@ -71,7 +73,7 @@ router.get("/plants/search", (req, res) => {
   PlantModel.find({
     name: {
       $regex: `^${name}`,
-      $options: "i"
+      $options: "i",
     },
   })
     .populate("creator")
@@ -81,14 +83,16 @@ router.get("/plants/search", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Search plant failed",
-        message: err
+        message: err,
       });
     });
 });
 
 // GET Fetch single plant
 router.get("/plants/fetch/:plantId", (req, res) => {
-  const { plantId } = req.params;
+  const {
+    params: { plantId },
+  } = req;
   PlantModel.findById(plantId)
     .populate("creator")
     .then((response) => {
@@ -97,16 +101,17 @@ router.get("/plants/fetch/:plantId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch plant failed",
-        message: err
+        message: err,
       });
     });
 });
 
 // PATCH Update plant
 router.patch("/plants/update/:plantId", (req, res) => {
-  const { name, description, size, location, imageUrl, imagePublicId, price } =
-    req.body;
-  const { plantId } = req.params;
+  const {
+    body: { name, description, size, location, imageUrl, imagePublicId, price },
+    params: { plantId },
+  } = req;
   const updatedPlant = {
     name,
     description,
@@ -114,7 +119,7 @@ router.patch("/plants/update/:plantId", (req, res) => {
     imageUrl,
     imagePublicId,
     location,
-    price
+    price,
   };
   PlantModel.findByIdAndUpdate(plantId, { $set: updatedPlant }, { new: true })
     .then((response) => {
@@ -123,7 +128,7 @@ router.patch("/plants/update/:plantId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Update plant failed",
-        message: err
+        message: err,
       });
     });
 });
@@ -138,7 +143,7 @@ router.delete("/plants/delete/:plantId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Delete plant failed",
-        message: err
+        message: err,
       });
     });
 });

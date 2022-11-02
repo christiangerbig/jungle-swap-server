@@ -11,13 +11,15 @@ router.post("/cloudinary/upload", uploader.single("image"), (req, res) => {
   }
   res.status(200).json({
     imagePublicId: req.file.filename,
-    imageUrl: req.file.path
+    imageUrl: req.file.path,
   });
 });
 
 // Delete image
 router.post("/cloudinary/destroy", (req, res) => {
-  const { imagePublicId } = req.body;
+  const {
+    body: { imagePublicId },
+  } = req;
   if (!imagePublicId) {
     res.status(400).json({ error: "Form: No image selected" });
     return;

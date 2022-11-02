@@ -4,8 +4,11 @@ const MessageModel = require("../models/Message.model");
 
 // POST Create message
 router.post("/messages/create", (req, res) => {
-  const buyer = req.session.loggedInUser._id;
-  const { request, seller, plant } = req.body;
+  const {
+    body: { request, seller, plant },
+    session: { loggedInUser },
+  } = req;
+  const buyer = loggedInUser._id;
   const reply = "";
   if (!request) {
     res.status(500).json({ error: "Form: Request text missing" });
@@ -26,7 +29,7 @@ router.post("/messages/create", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Create message failed",
-        message: err
+        message: err,
       });
     });
 });
@@ -43,14 +46,16 @@ router.get("/messages/fetch-all", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch all messages failed",
-        message: err
+        message: err,
       });
     });
 });
 
 // GET Fetch single message
 router.get("/messages/fetch/:messageId", (req, res) => {
-  const { messageId } = req.params;
+  const {
+    params: { messageId },
+  } = req;
   MessageModel.findById(messageId)
     .populate("buyer")
     .populate("seller")
@@ -61,15 +66,17 @@ router.get("/messages/fetch/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Fetch message failed",
-        message: err
+        message: err,
       });
     });
 });
 
 // PATCH Update message
 router.patch("/messages/update/:messageId", (req, res) => {
-  const { buyer, seller, plant, request, reply, messageState } = req.body;
-  const { messageId } = req.params;
+  const {
+    body: { buyer, seller, plant, request, reply, messageState },
+    params: { messageId },
+  } = req;
   if (!reply && messageState) {
     res.status(500).json({ error: "Form: Reply text missing" });
     return;
@@ -94,14 +101,16 @@ router.patch("/messages/update/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Update message failed",
-        message: err
+        message: err,
       });
     });
 });
 
 // DELETE message
 router.delete("/messages/delete/:messageId", (req, res) => {
-  const { messageId } = req.params;
+  const {
+    params: { messageId },
+  } = req;
   MessageModel.findByIdAndDelete(messageId)
     .then((response) => {
       res.status(200).json(response);
@@ -109,7 +118,7 @@ router.delete("/messages/delete/:messageId", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Delete message failed",
-        message: err
+        message: err,
       });
     });
 });
