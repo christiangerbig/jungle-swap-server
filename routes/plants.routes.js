@@ -135,7 +135,9 @@ router.patch("/plants/update/:plantId", (req, res) => {
 
 // DELETE plant
 router.delete("/plants/delete/:plantId", (req, res) => {
-  const { plantId } = req.params;
+  const {
+    params: { plantId },
+  } = req;
   PlantModel.findByIdAndDelete(plantId)
     .then((response) => {
       res.status(200).json(response);

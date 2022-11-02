@@ -5,7 +5,9 @@ const UserModel = require("../models/User.model");
 
 // POST Sign up
 router.post("/auth/sign-up", (req, res) => {
-  const { username, email, password } = req.body;
+  const {
+    body: { username, email, password },
+  } = req;
   // Check if parameters are missing
   if (!username) {
     res.status(500).json({ error: "Form: Username missing" });
@@ -33,8 +35,7 @@ router.post("/auth/sign-up", (req, res) => {
   );
   if (!passwordRegExp.test(password)) {
     res.status(500).json({
-      error:
-        "Form: Password invalid",
+      error: "Form: Password invalid",
     });
     return;
   }
@@ -58,12 +59,12 @@ router.post("/auth/sign-up", (req, res) => {
       if (err.code === 11000) {
         res.status(500).json({
           error: "Form: Username or email already exists",
-          message: err
+          message: err,
         });
       } else {
         res.status(500).json({
           error: "Error while creating user",
-          message: err
+          message: err,
         });
       }
     });
@@ -71,7 +72,9 @@ router.post("/auth/sign-up", (req, res) => {
 
 // POST Sign in
 router.post("/auth/sign-in", (req, res) => {
-  const { email, password } = req.body;
+  const {
+    body: { email, password },
+  } = req;
   // Check if parameters are missing
   if (!email) {
     res.status(500).json({ error: "Form: Email missing" });
@@ -113,7 +116,7 @@ router.post("/auth/sign-in", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "User does not exist",
-        message: err
+        message: err,
       });
       return;
     });
@@ -121,14 +124,15 @@ router.post("/auth/sign-in", (req, res) => {
 
 // POST Log out
 router.post("/auth/log-out", (req, res) => {
-  const { username, email, password, amountOfRequests, amountOfReplies } =
-    req.body;
+  const {
+    body: { username, email, password, amountOfRequests, amountOfReplies },
+  } = req;
   const updatedUser = {
     username,
     email,
     password,
     amountOfRequests,
-    amountOfReplies
+    amountOfReplies,
   };
   UserModel.findOneAndUpdate({ email }, { $set: updatedUser }, { new: true })
     .then((response) => {
@@ -137,7 +141,7 @@ router.post("/auth/log-out", (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Could not update user",
-        message: err
+        message: err,
       });
       req.session.destroy();
       return;
@@ -153,7 +157,7 @@ const checkUserLoggedIn = (req, res, next) => {
   } else {
     res.status(401).json({
       error: "Unauthorized user",
-      code: 401
+      code: 401,
     });
   }
 };
