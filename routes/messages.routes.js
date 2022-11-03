@@ -6,9 +6,11 @@ const MessageModel = require("../models/Message.model");
 router.post("/messages/create", (req, res) => {
   const {
     body: { request, seller, plant },
-    session: { loggedInUser },
+    session: {
+      loggedInUser: { _id },
+    },
   } = req;
-  const buyer = loggedInUser._id;
+  const buyer = _id;
   const reply = "";
   if (!request) {
     res.status(500).json({ error: "Form: Request text missing" });

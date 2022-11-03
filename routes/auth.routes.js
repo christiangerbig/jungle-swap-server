@@ -152,7 +152,10 @@ router.post("/auth/log-out", (req, res) => {
 
 // Middleware to check if user is logged in
 const checkUserLoggedIn = (req, res, next) => {
-  if (req.session.loggedInUser) {
+  const {
+    session: { loggedInUser },
+  } = req;
+  if (loggedInUser) {
     next();
   } else {
     res.status(401).json({
@@ -164,7 +167,10 @@ const checkUserLoggedIn = (req, res, next) => {
 
 // GET Check for protected route
 router.get("/auth/check-user", checkUserLoggedIn, (req, res) => {
-  res.status(200).json(req.session.loggedInUser);
+  const {
+    session: { loggedInUser },
+  } = req;
+  res.status(200).json(loggedInUser);
 });
 
 module.exports = router;

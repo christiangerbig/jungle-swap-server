@@ -6,9 +6,11 @@ const PlantModel = require("../models/Plant.model");
 router.post("/plants/create", (req, res) => {
   const {
     body: { name, description, size, imageUrl, imagePublicId, location, price },
-    session: { loggedInUser },
+    session: {
+      loggedInUser: { _id },
+    },
   } = req;
-  const creator = loggedInUser._id;
+  const creator = _id;
   // Check if plant parameters are missing
   if (!name) {
     res.status(500).json({ error: "Form: Name missing" });
@@ -70,7 +72,10 @@ router.get("/plants/fetch-all", (req, res) => {
 
 // GET Search plant
 router.get("/plants/search", (req, res) => {
-  const name = req.query.q;
+  const {
+    query: { q },
+  } = req;
+  const name = q;
   PlantModel.find({
     name: {
       $regex: `^${name}`,

@@ -5,13 +5,15 @@ const uploader = require("../config/cloudinary.config.js");
 
 // Upload image
 router.post("/cloudinary/upload", uploader.single("image"), (req, res) => {
-  if (!req.file) {
+  const { file } = req;
+  if (!file) {
     res.status(500).json({ error: "Form: Image missing" });
     return;
   }
+  const { filename, path } = file;
   res.status(200).json({
-    imagePublicId: req.file.filename,
-    imageUrl: req.file.path,
+    imagePublicId: filename,
+    imageUrl: path,
   });
 });
 
