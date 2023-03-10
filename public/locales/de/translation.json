@@ -52,7 +52,7 @@
       "search": "Nach einem Ort suchen",
       "selectAll": "Alle Orte auswählen",
       "selectAllFiltered": "Alle (gefilterten) Orte auswählen",
-      "selectSomeItems": "Wähle einen Ort aus...",
+      "selectSomeItems": "Ort wählen...",
       "create": "Erstellen"
     }
   },
@@ -62,6 +62,12 @@
       "placeholder": "Sprache",
       "english": "Englisch",
       "german": "Deutsch"
+    },
+    "location": {
+      "title": "Ort auswählen",
+      "sun": "Sonne",
+      "shade": "Schatten",
+      "sunAndShade": "Sonne und Schatten"
     }
   },
 
@@ -88,7 +94,7 @@
       },
       "searchPlant": {
         "headline": "Suche nach einer Pflanze",
-        "namePlaceholder": "Gib einen Namen ein"
+        "namePlaceholder": "Name"
       }
     },
     "authentification": {

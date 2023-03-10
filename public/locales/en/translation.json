@@ -62,6 +62,12 @@
       "placeholder": "Language",
       "english": "English",
       "german": "German"
+    },
+    "location": {
+      "title": "Select location",
+      "sun": "sun",
+      "shade": "shade",
+      "sunAndShade": "sun and shade"
     }
   },
 
@@ -88,7 +94,7 @@
       },
       "searchPlant": {
         "headline": "Search a plant",
-        "namePlaceholder": "Enter name"
+        "namePlaceholder": "Name"
       }
     },
     "authentification": {
